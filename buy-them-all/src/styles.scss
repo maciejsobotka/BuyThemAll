@@ -1,0 +1,112 @@
+@import '~@angular/material/theming';
+@import './scss/common';
+
+@include mat-core();
+$app-color-primary: mat-palette($mat-grey, 900, 800, 1000);
+$app-color-accent: mat-palette($mat-grey);
+$color-app-warn:    mat-palette($mat-red);
+$app-theme: mat-light-theme($app-color-primary, $app-color-accent, $color-app-warn);
+
+@include angular-material-theme($app-theme);
+
+//To add another secondary theme: https://github.com/angular/material2/blob/master/guides/theming.md
+
+html, body {
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, Arial, sans-serif;
+    margin: 0;
+    height: 100%;
+    background: white;
+}
+
+div.loader {
+    border: 16px solid gray;
+    border-top: 16px solid #3f51b5;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+mat-sidenav {
+    width: 250px;
+}
+
+mat-sidenav-container.with-margin {
+    margin-top: 64px;
+}
+
+@media (max-width: 600px) {
+    mat-sidenav-container.with-margin {
+        margin-top: 56px;
+    }
+}
+
+mat-nav-list {
+    padding-top: 0 !important;
+}
+
+mat-card-title, mat-card-content, a {
+    font-weight: 300 !important;
+}
+
+mat-card.tab-toolbar {
+    font-size: 24px !important;
+    font-weight: 300 !important;
+    color: white !important;
+    align-items: center;
+}
+
+mat-card.account-card {
+    width: 300px;
+}
+
+mat-error.server-error {
+    font-size: 14px !important;
+    font-weight: 300 !important;
+}
+
+button.button-toolbar {
+    height: 80%;
+    padding-left: 4px !important;
+    padding-right: 8px !important;
+}
+
+img.icon-toolbar {
+    height: 52px !important;
+}
+
+@media (max-width: 600px) {
+    img.icon-toolbar {
+        height: 44px !important;
+    }
+}
+
+span.home-toolbar {
+    font-size: 20px !important;
+    font-weight: 400 !important;
+}
+
+a.link {
+    color: gray;
+}
