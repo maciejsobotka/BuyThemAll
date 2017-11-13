@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{f53dfaad-52a7-4988-b1d7-2b7d05036f07}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -57,5 +57,20 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Address.sql" />
+    <Build Include="Client.sql" />
+    <Build Include="Category.sql" />
+    <Build Include="Manufacturer.sql" />
+    <Build Include="Product.sql" />
+    <Build Include="OrderProduct.sql" />
+    <Build Include="Order.sql" />
+    <Build Include="Voivodeship.sql" />
+    <Build Include="ClientAddress.sql" />
+    <Build Include="Avalibility.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="BuyThemAllDatabase.refactorlog" />
   </ItemGroup>
 </Project>

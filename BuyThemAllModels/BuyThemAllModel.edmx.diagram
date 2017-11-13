@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="92397023bbdd43338167b41f9498ee81" Name="Diagram1">
+        <EntityTypeShape EntityType="BuyThemAllModel.Address" Width="1.5" PointX="8.75" PointY="4" />
+        <EntityTypeShape EntityType="BuyThemAllModel.Avalibility" Width="1.5" PointX="0.875" PointY="0.5" />
+        <EntityTypeShape EntityType="BuyThemAllModel.Category" Width="1.5" PointX="0.875" PointY="4.625" />
+        <EntityTypeShape EntityType="BuyThemAllModel.Client" Width="1.5" PointX="11.5" PointY="0.5" />
+        <EntityTypeShape EntityType="BuyThemAllModel.ClientAddress" Width="1.5" PointX="11.375" PointY="4" />
+        <EntityTypeShape EntityType="BuyThemAllModel.Manufacturer" Width="1.5" PointX="0.875" PointY="2.625" />
+        <EntityTypeShape EntityType="BuyThemAllModel.Order" Width="1.5" PointX="8.75" PointY="0.5" />
+        <EntityTypeShape EntityType="BuyThemAllModel.OrderProduct" Width="1.5" PointX="6" PointY="0.5" />
+        <EntityTypeShape EntityType="BuyThemAllModel.Product" Width="1.5" PointX="3.375" PointY="0.5" />
+        <EntityTypeShape EntityType="BuyThemAllModel.Voivodeship" Width="1.5" PointX="6.375" PointY="4" />
+        <AssociationConnector Association="BuyThemAllModel.FK_Address_Voivodeship" />
+        <AssociationConnector Association="BuyThemAllModel.FK_ClientAddress_Address" />
+        <AssociationConnector Association="BuyThemAllModel.FK_Order_Address" />
+        <AssociationConnector Association="BuyThemAllModel.FK_Product_Avalibility" />
+        <AssociationConnector Association="BuyThemAllModel.FK_Product_Category" />
+        <AssociationConnector Association="BuyThemAllModel.FK_ClientAddress_Clinet" />
+        <AssociationConnector Association="BuyThemAllModel.FK_Order_Client" />
+        <AssociationConnector Association="BuyThemAllModel.FK_Product_Manufacturer" />
+        <AssociationConnector Association="BuyThemAllModel.FK_OrderProduct_Order" />
+        <AssociationConnector Association="BuyThemAllModel.FK_OrderProduct_Product" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

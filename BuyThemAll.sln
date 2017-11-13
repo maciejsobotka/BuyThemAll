@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyThemAll", "BuyThemAll\Bu
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BuyThemAllDatabase", "BuyThemAllDatabase\BuyThemAllDatabase.sqlproj", "{F53DFAAD-52A7-4988-B1D7-2B7D05036F07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyThemAllModel", "BuyThemAllModels\BuyThemAllModel.csproj", "{C6B1A247-B1E4-47D1-B851-D04C99EDA45E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{F53DFAAD-52A7-4988-B1D7-2B7D05036F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F53DFAAD-52A7-4988-B1D7-2B7D05036F07}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F53DFAAD-52A7-4988-B1D7-2B7D05036F07}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C6B1A247-B1E4-47D1-B851-D04C99EDA45E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6B1A247-B1E4-47D1-B851-D04C99EDA45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6B1A247-B1E4-47D1-B851-D04C99EDA45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6B1A247-B1E4-47D1-B851-D04C99EDA45E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
