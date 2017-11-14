@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Avalibility]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
-    [Name] NVARCHAR(50) NOT NULL, 
+	[Id] INT IDENTITY PRIMARY KEY, 
+    [Name] NVARCHAR(50) NOT NULL UNIQUE, 
     [Description] NVARCHAR(MAX) NOT NULL
 )

@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[ClientAddress]
 (
-	[Id] INT NOT NULL PRIMARY KEY, 
+	[Id] INT IDENTITY PRIMARY KEY, 
     [ClientId] INT NOT NULL, 
     [AddressId] INT NOT NULL, 
     CONSTRAINT [FK_ClientAddress_Clinet] FOREIGN KEY ([ClientId]) REFERENCES [Client]([Id]), 
