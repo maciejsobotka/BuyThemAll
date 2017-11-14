@@ -16,7 +16,7 @@ export class ProductsComponent implements OnInit {
   constructor(private dataService: DataService, private dialog: MatDialog, ) { }
 
   ngOnInit() {
-    this.dataService.getProducts('api/Products')
+    this.dataService.getProducts('http://localhost:50126/api/Products')
     .subscribe(prods => {
         this.Products = prods;
     });

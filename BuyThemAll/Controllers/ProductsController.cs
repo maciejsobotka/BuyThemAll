@@ -12,17 +12,17 @@ using BuyThemAllModel;
 
 namespace BuyThemAll.Controllers
 {
-    public class ProductsApiController : ApiController
+    public class ProductsController : ApiController
     {
         private BuyThemAllEntities db = new BuyThemAllEntities();
 
-        // GET: api/ProductsApi
+        // GET: api/Products
         public IQueryable<Product> GetProduct()
         {
             return db.Product;
         }
 
-        // GET: api/ProductsApi/5
+        // GET: api/Products/5
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
         {
@@ -35,7 +35,7 @@ namespace BuyThemAll.Controllers
             return Ok(product);
         }
 
-        // PUT: api/ProductsApi/5
+        // PUT: api/Products/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProduct(int id, Product product)
         {
@@ -70,7 +70,7 @@ namespace BuyThemAll.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/ProductsApi
+        // POST: api/Products
         [ResponseType(typeof(Product))]
         public IHttpActionResult PostProduct(Product product)
         {
@@ -85,7 +85,7 @@ namespace BuyThemAll.Controllers
             return CreatedAtRoute("DefaultApi", new { id = product.Id }, product);
         }
 
-        // DELETE: api/ProductsApi/5
+        // DELETE: api/Products/5
         [ResponseType(typeof(Product))]
         public IHttpActionResult DeleteProduct(int id)
         {

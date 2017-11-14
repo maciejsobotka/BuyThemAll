@@ -57,6 +57,7 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Address.sql" />
@@ -69,6 +70,8 @@
     <Build Include="Voivodeship.sql" />
     <Build Include="ClientAddress.sql" />
     <Build Include="Avalibility.sql" />
+    <None Include="Scripts\InsertEnums.sql" />
+    <None Include="Scripts\InsertProducts.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BuyThemAllDatabase.refactorlog" />
