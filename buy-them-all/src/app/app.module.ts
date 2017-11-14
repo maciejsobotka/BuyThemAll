@@ -14,12 +14,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './shared/services/auth.service';
 import { DataService } from './shared/services/data.service';
 import { ToolbarService } from './shared/services/toolbar.service';
+import { ProductsComponent } from './components/products/products.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    ProductsComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

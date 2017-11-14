@@ -11,10 +11,9 @@ import { IMenuItem } from './shared/models/menu-item';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent{
-
+export class AppComponent {
     activeMenuItem$: Observable<IMenuItem>;
-    appName = 'BuyThemAll';
+    appName = 'Shop';
     mainMenuItems: any;
     isAuthorized: boolean;
 
