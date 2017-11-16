@@ -1,10 +1,20 @@
-<div *ngFor="let product of Products; let i = index" fxLayout="row" fxLayout.xs="column" fxLayoutGap="16px" fxLayoutWrap>
-  <md-card (click)="openDialog(product)">
-      <md-card-title>
-          {{product.Name}}
-      </md-card-title>
-      <md-card-content>
-          {{product.Name}}
-      </md-card-content>
-  </md-card>
+<div *ngFor="let product of Products; let i = index"
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutAlign="space-around start"
+      fxLayoutAlign.xs=" strech"
+      fxLayoutWrap
+      fxLayoutWrap.xs="nowrap">
+  <mat-card class="space-bottom" fxFlex="24" fxFlex.sm="48" (click)="openDialog(product)">
+      <mat-card-title class="image aspect-ratio" fxLayout="column" fxLayoutAlign="center center">
+        <div class="svg-container">
+          <img src="./assets/img/svgs.svg#g1">
+        </div>
+        </mat-card-title>
+      <mat-card-content fxLayout="column" fxLayoutAlign="space-around center">
+          <div>{{product.Name}}</div>
+          <div>{{product.Price}} zł</div>
+          <div>{{product.Avalibility.Name}}</div>
+      </mat-card-content>
+  </mat-card>
 </div>

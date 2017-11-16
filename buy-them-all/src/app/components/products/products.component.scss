@@ -1,0 +1,19 @@
+.image {
+    background-image: url("/assets/img/whiteT.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.aspect-ratio {
+    padding-top: 20%;
+    padding-bottom: 40%;
+    max-width: 100%
+}
+
+.svg-container {
+    min-width: 40%;
+}
+
+.space-bottom {
+    margin-bottom: 8px;
+}
