@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
 
 import { DataService } from '../../shared/services/data.service';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
@@ -13,7 +12,7 @@ import { IProduct } from '../../shared/models/product';
 export class ProductsComponent implements OnInit {
   Products: IProduct[];
 
-  constructor(private dataService: DataService, private dialog: MatDialog, ) { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.dataService.getProducts('http://localhost:50126/api/Products')
@@ -22,15 +21,11 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  openDialog(data: IProduct): void {
-    const dialogRef = this.dialog.open(ProductDetailComponent, {
-        width: '80vw',
-        data: data
-});
+  addToWishlist(product: IProduct) {
+    console.log('AddToWishlist');
+  }
 
-    dialogRef.afterClosed().subscribe(() => {
-        console.log('The dialog was closed');
-    });
-}
-
+  goToDetail(product: IProduct) {
+    console.log('GoToProduct');
+  }
 }

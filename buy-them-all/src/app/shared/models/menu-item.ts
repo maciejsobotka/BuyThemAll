@@ -3,6 +3,6 @@
     title?: string;
     icon?: string;
     hidden?: boolean;
-    hiddenToolbar?: boolean;
+    noToolbar?: boolean;
     authRequired?: boolean;
 }

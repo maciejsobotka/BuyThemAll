@@ -72,6 +72,7 @@
     <Build Include="Avalibility.sql" />
     <None Include="Scripts\InsertEnums.sql" />
     <None Include="Scripts\InsertProducts.sql" />
+    <Build Include="Graphic.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BuyThemAllDatabase.refactorlog" />

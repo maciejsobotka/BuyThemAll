@@ -2,5 +2,6 @@
 (
 	[Id] INT IDENTITY PRIMARY KEY, 
     [Name] NVARCHAR(50) NOT NULL UNIQUE, 
-    [Description] NVARCHAR(MAX) NOT NULL
+    [Description] NVARCHAR(MAX) NOT NULL, 
+    [Color] NVARCHAR(50) NOT NULL DEFAULT 'GREEN'
 )

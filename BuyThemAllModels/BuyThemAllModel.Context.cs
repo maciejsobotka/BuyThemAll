@@ -35,5 +35,6 @@ namespace BuyThemAllModel
         public virtual DbSet<OrderProduct> OrderProduct { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Voivodeship> Voivodeship { get; set; }
+        public virtual DbSet<Graphic> Graphic { get; set; }
     }
 }

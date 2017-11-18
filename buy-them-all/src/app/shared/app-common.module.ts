@@ -20,6 +20,7 @@ import { // only import the portions you will use to optimize build (MaterialMod
     MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatDialogModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -45,11 +46,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       MatSlideToggleModule,
       MatSnackBarModule,
       MatToolbarModule,
+      MatTooltipModule,
       MatDialogModule,
       MatTabsModule,
       FlexLayoutModule
   ],
-  declarations: [],
   exports: [
       MatAutocompleteModule,
       MatCommonModule,
@@ -69,6 +70,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       MatSlideToggleModule,
       MatSnackBarModule,
       MatToolbarModule,
+      MatTooltipModule,
       MatDialogModule,
       MatTabsModule,
       FlexLayoutModule

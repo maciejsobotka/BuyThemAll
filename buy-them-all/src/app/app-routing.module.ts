@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 const routes: Routes = [{
     path: '',
@@ -13,8 +14,8 @@ const routes: Routes = [{
     path: 'home',
     component: HomeComponent,
     data: {
-        icon: 'home',
-        hidden: true
+      icon: 'home',
+      hidden: true
     }
   },
   {
@@ -23,6 +24,13 @@ const routes: Routes = [{
     data: {
       icon: 'person',
       title: 'Koszulki'
+    }
+  },
+  {
+    path: 'products/:id',
+    component: ProductDetailComponent,
+    data: {
+      hidden: true
     }
   }];
 

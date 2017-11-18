@@ -24,3 +24,13 @@ INSERT INTO [dbo].[Manufacturer] ([Name])
 			('Grofuruta')
 GO
 
+INSERT INTO [dbo].[Graphic] ([Symbol])
+     VALUES ('g1'),
+			('g2'),
+			('g3'),
+			('g4'),
+			('g5'),
+			('g6'),
+			('g7'),
+			('g8')
+GO

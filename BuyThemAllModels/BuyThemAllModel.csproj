@@ -76,6 +76,9 @@
     <Compile Include="ClientAddress.cs">
       <DependentUpon>BuyThemAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Graphic.cs">
+      <DependentUpon>BuyThemAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Manufacturer.cs">
       <DependentUpon>BuyThemAllModel.tt</DependentUpon>
     </Compile>

@@ -5,21 +5,24 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-
 import { AppCommonModule } from './shared/app-common.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AuthService } from './shared/services/auth.service';
 import { DataService } from './shared/services/data.service';
 import { ToolbarService } from './shared/services/toolbar.service';
+
+import { ClickStopPropagationDirective } from './shared/directives/click-stop-propagation.directive';
+
+import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 
 @NgModule({
   declarations: [
+    ClickStopPropagationDirective,
     AppComponent,
     HomeComponent,
     ProductsComponent,

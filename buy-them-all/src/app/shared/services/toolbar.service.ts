@@ -35,7 +35,7 @@ export class ToolbarService {
                     title: route.data.title,
                     icon: route.data.icon,
                     hidden: route.data.hidden,
-                    toolbarHidden: route.data.hiddenToolbar,
+                    noToolbar: route.data.noToolbar,
                     authRequired: route.data.authRequired
                 };
             });
@@ -56,7 +56,7 @@ export class ToolbarService {
                 title: cfg.data.title,
                 icon: cfg.data.icon,
                 hidden: cfg.data.hidden,
-                hiddenToolbar: cfg.data.hiddenToolbar,
+                noToolbar: cfg.data.noToolbar,
                 authRequired: cfg.data.authRequired
             }
             : undefined;

@@ -5,16 +5,21 @@
       fxLayoutAlign.xs=" strech"
       fxLayoutWrap
       fxLayoutWrap.xs="nowrap">
-  <mat-card class="space-bottom" fxFlex="24" fxFlex.sm="48" (click)="openDialog(product)">
+  <mat-card class="space-bottom" fxFlex="24" fxFlex.sm="48" [routerLink]="['/products', product.Id]">
       <mat-card-title class="image aspect-ratio" fxLayout="column" fxLayoutAlign="center center">
         <div class="svg-container">
-          <img src="./assets/img/svgs.svg#g1">
+          <img src="./assets/img/svgs.svg#{{product.Graphic.Symbol}}">
         </div>
         </mat-card-title>
-      <mat-card-content fxLayout="column" fxLayoutAlign="space-around center">
-          <div>{{product.Name}}</div>
-          <div>{{product.Price}} zł</div>
-          <div>{{product.Avalibility.Name}}</div>
+      <mat-card-content class="m-y-0" fxLayout="column" fxLayoutAlign="space-around center">
+          <div class="product-name">{{product.Name}}</div>
+          <div class="product-price">{{product.Price | number: '1.2'}}PLN</div>
       </mat-card-content>
+      <mat-card-actions class="p-y-0" fxLayout="row" fxLayoutAlign="center center">
+        <div class="product-avalibility green" matTooltip="{{product.Avalibility.Description}}" matTooltipPosition="left"></div>
+        <button class="product-wishlist" appClickStopPropagation mat-icon-button matTooltip="Dodaj do Whishlist" matTooltipPosition="right" (click)="addToWishlist(product)">
+          <mat-icon>favorite_border</mat-icon>
+        </button>
+      </mat-card-actions>
   </mat-card>
 </div>

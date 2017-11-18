@@ -17,3 +17,39 @@
 .space-bottom {
     margin-bottom: 8px;
 }
+
+.product-name {
+    font-size: larger;
+    font-weight: 100;
+}
+
+.product-price {
+    font-weight: bold;
+}
+
+.product-avalibility {
+    font-size: small;
+}
+
+    .green::before {
+        content: ' \25CF';
+        color: rgb(36, 197, 36);
+        font-size: 30px;
+
+    }
+
+    .yellow::before {
+        content: ' \25CF';
+        color: rgb(255, 235, 55);
+        font-size: 30px;
+    }
+
+    .red::before {
+        content: ' \25CF';
+        color: rgb(192, 5, 5);
+        font-size: 30px;
+    }
+
+.product-wishlist {
+    z-index: 999;
+}
