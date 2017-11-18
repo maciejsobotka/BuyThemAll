@@ -6,8 +6,8 @@
       fxLayoutWrap
       fxLayoutWrap.xs="nowrap">
   <mat-card class="space-bottom" fxFlex="24" fxFlex.sm="48" [routerLink]="['/products', product.Id]">
-      <mat-card-title class="image aspect-ratio" fxLayout="column" fxLayoutAlign="center center">
-        <div class="svg-container">
+      <mat-card-title class="image-{{product.Category.Code | lowercase}}" fxLayout="column" fxLayoutAlign="center center">
+        <div class="svg-container-{{product.Category.Code | lowercase}}">
           <img src="./assets/img/svgs.svg#{{product.Graphic.Symbol}}">
         </div>
         </mat-card-title>
@@ -16,10 +16,13 @@
           <div class="product-price">{{product.Price | number: '1.2'}}PLN</div>
       </mat-card-content>
       <mat-card-actions class="p-y-0" fxLayout="row" fxLayoutAlign="center center">
-        <div class="product-avalibility green" matTooltip="{{product.Avalibility.Description}}" matTooltipPosition="left"></div>
+        <div class="product-avalibility {{product.Avalibility.Color | lowercase}}" matTooltip="{{product.Avalibility.Description}}" matTooltipPosition="left"></div>
         <button class="product-wishlist" appClickStopPropagation mat-icon-button matTooltip="Dodaj do Whishlist" matTooltipPosition="right" (click)="addToWishlist(product)">
           <mat-icon>favorite_border</mat-icon>
         </button>
       </mat-card-actions>
   </mat-card>
+<div fxFlex="24" fxFlex.sm="48" ></div>
+<div fxFlex="24" fxFlex.sm="48" ></div>
+<div fxFlex="24" fxFlex.sm="48" ></div>
 </div>

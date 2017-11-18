@@ -1,17 +1,41 @@
-.image {
+.image-t-shirt {
     background-image: url("/assets/img/whiteT.jpg");
     background-size: contain;
     background-repeat: no-repeat;
+    background-position: center center;
 }
 
-.aspect-ratio {
-    padding-top: 20%;
-    padding-bottom: 40%;
-    max-width: 100%
+.image-mug {
+    background-image: url("/assets/img/whiteM.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
-.svg-container {
+.image-poster {
+    background-image: url("/assets/img/whiteP.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.svg-container-t-shirt {
+    margin-top: 20%;
     min-width: 40%;
+    padding-bottom: 40%;
+}
+
+.svg-container-mug {
+    margin-top: 30%;
+    margin-right: 30%;
+    min-width: 40%;
+    padding-bottom: 30%;
+}
+
+.svg-container-poster {
+    margin-top: 30%;
+    min-width: 40%;
+    padding-bottom: 30%;
 }
 
 .space-bottom {

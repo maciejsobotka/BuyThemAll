@@ -18,6 +18,7 @@ export class ProductsComponent implements OnInit {
     this.dataService.getProducts('http://localhost:50126/api/Products')
     .subscribe(prods => {
         this.Products = prods;
+        console.log(prods);
     });
   }
 
