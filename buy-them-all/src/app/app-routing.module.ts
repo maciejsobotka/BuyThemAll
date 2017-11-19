@@ -15,6 +15,7 @@ const routes: Routes = [{
     component: HomeComponent,
     data: {
       icon: 'home',
+      title: 'A Shop',
       hidden: true
     }
   },
@@ -23,11 +24,39 @@ const routes: Routes = [{
     component: ProductsComponent,
     data: {
       icon: 'person',
-      title: 'Koszulki'
+      title: 'Wszystkie produkty',
+      api: '/api/Products/GetProducts'
     }
   },
   {
-    path: 'products/:id',
+    path: 't-shirts',
+    component: ProductsComponent,
+    data: {
+      icon: 'person',
+      title: 'Koszulki',
+      api: '/api/Products/GetTShirts'
+    }
+  },
+  {
+    path: 'mugs',
+    component: ProductsComponent,
+    data: {
+      icon: 'person',
+      title: 'Kubki',
+      api: '/api/Products/GetMugs'
+    }
+  },
+  {
+    path: 'posters',
+    component: ProductsComponent,
+    data: {
+      icon: 'person',
+      title: 'Plakaty',
+      api: '/api/Products/GetPosters'
+    }
+  },
+  {
+    path: 'product/:id',
     component: ProductDetailComponent,
     data: {
       hidden: true

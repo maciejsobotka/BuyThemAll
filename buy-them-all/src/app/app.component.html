@@ -26,8 +26,7 @@
                   <a *ngIf="!navItem.hidden && (!navItem.authRequired || (navItem.authRequired && authService.isAuthorized))" mat-list-item mat-ripple
                       [routerLink]="[navItem.path]"
                       (click)="mainSideNav.close()">
-                      <mat-icon class="m-x-sm">{{navItem.icon}}</mat-icon>
-                      <span>{{navItem.title}}</span>
+                      <span class="nav-item">{{navItem.title | uppercase}}</span>
                   </a>
               </ng-container>
           </mat-nav-list>

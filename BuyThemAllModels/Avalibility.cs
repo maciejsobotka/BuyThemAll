@@ -14,18 +14,9 @@ namespace BuyThemAllModel
     
     public partial class Avalibility
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Avalibility()
-        {
-            this.Product = new HashSet<Product>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Color { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Product { get; set; }
     }
 }

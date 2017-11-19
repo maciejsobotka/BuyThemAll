@@ -17,8 +17,8 @@ namespace BuyThemAllModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Address()
         {
-            this.ClientAddress = new HashSet<ClientAddress>();
-            this.Order = new HashSet<Order>();
+            this.ClientAddresses = new HashSet<ClientAddress>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int Id { get; set; }
@@ -30,8 +30,8 @@ namespace BuyThemAllModel
     
         public virtual Voivodeship Voivodeship { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientAddress> ClientAddress { get; set; }
+        public virtual ICollection<ClientAddress> ClientAddresses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

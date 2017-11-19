@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BuyThemAllModel;
@@ -14,19 +10,37 @@ namespace BuyThemAll.Controllers
 {
     public class ProductsController : ApiController
     {
-        private BuyThemAllEntities db = new BuyThemAllEntities();
+        private readonly BuyThemAllEntities db = new BuyThemAllEntities();
 
         // GET: api/Products
-        public IQueryable<Product> GetProduct()
+        public IQueryable<Product> GetProducts()
         {
-            return db.Product;
+            return db.Products;
+        }
+
+        // GET: api/Products
+        public IQueryable<Product> GetTShirts()
+        {
+            return db.Products.Where(p => p.Category.Code == "T-SHIRT");
+        }
+
+        // GET: api/Products
+        public IQueryable<Product> GetMugs()
+        {
+            return db.Products.Where(p => p.Category.Code == "MUG"); ;
+        }
+
+        // GET: api/Products
+        public IQueryable<Product> GetPosters()
+        {
+            return db.Products.Where(p => p.Category.Code == "POSTER"); ;
         }
 
         // GET: api/Products/5
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
         {
-            Product product = db.Product.Find(id);
+            Product product = db.Products.Find(id);
             if (product == null)
             {
                 return NotFound();
@@ -79,7 +93,7 @@ namespace BuyThemAll.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Product.Add(product);
+            db.Products.Add(product);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = product.Id }, product);
@@ -89,13 +103,13 @@ namespace BuyThemAll.Controllers
         [ResponseType(typeof(Product))]
         public IHttpActionResult DeleteProduct(int id)
         {
-            Product product = db.Product.Find(id);
+            Product product = db.Products.Find(id);
             if (product == null)
             {
                 return NotFound();
             }
 
-            db.Product.Remove(product);
+            db.Products.Remove(product);
             db.SaveChanges();
 
             return Ok(product);
@@ -112,7 +126,7 @@ namespace BuyThemAll.Controllers
 
         private bool ProductExists(int id)
         {
-            return db.Product.Count(e => e.Id == id) > 0;
+            return db.Products.Count(e => e.Id == id) > 0;
         }
     }
 }

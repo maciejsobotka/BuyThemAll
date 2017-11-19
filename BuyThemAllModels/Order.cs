@@ -17,7 +17,7 @@ namespace BuyThemAllModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.OrderProduct = new HashSet<OrderProduct>();
+            this.OrderProducts = new HashSet<OrderProduct>();
         }
     
         public int Id { get; set; }
@@ -31,6 +31,6 @@ namespace BuyThemAllModel
         public virtual Address Address { get; set; }
         public virtual Client Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderProduct> OrderProduct { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

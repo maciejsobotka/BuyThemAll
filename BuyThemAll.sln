@@ -9,6 +9,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BuyThemAllDatabase", "BuyTh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyThemAllModel", "BuyThemAllModels\BuyThemAllModel.csproj", "{C6B1A247-B1E4-47D1-B851-D04C99EDA45E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyThemAllGenerateData", "BuyThemAllGenerateData\BuyThemAllGenerateData.csproj", "{B1CF2C07-3DC9-4B73-89E6-CB35EED6FD66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{C6B1A247-B1E4-47D1-B851-D04C99EDA45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6B1A247-B1E4-47D1-B851-D04C99EDA45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6B1A247-B1E4-47D1-B851-D04C99EDA45E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1CF2C07-3DC9-4B73-89E6-CB35EED6FD66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1CF2C07-3DC9-4B73-89E6-CB35EED6FD66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1CF2C07-3DC9-4B73-89E6-CB35EED6FD66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1CF2C07-3DC9-4B73-89E6-CB35EED6FD66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

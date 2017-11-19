@@ -9,11 +9,12 @@ import { IProduct } from '../models/product';
 
 @Injectable()
 export class DataService {
+  private apiHost = 'http://localhost:50126';
 
   constructor(private http: Http) {}
 
   getProducts(apiUrl: string): Observable<IProduct[]> {
-    return this.http.get(apiUrl)
+    return this.http.get(this.apiHost + apiUrl)
         .map((res: Response) => res.json())
         .catch((error: any) => {
             console.log(error);
