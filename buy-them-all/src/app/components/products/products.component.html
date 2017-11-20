@@ -4,22 +4,27 @@
       fxLayoutAlign.xs=" strech"
       fxLayoutWrap
       fxLayoutWrap.xs="nowrap">
-  <mat-card *ngFor="let product of Products; let i = index" class="space-bottom" fxFlex="24" fxFlex.sm="48" [routerLink]="['/products', product.Id]">
-      <mat-card-title class="image-{{product.Category.Code | lowercase}}" fxLayout="column" fxLayoutAlign="center center">
-        <div class="svg-container-{{product.Category.Code | lowercase}}">
-          <img src="./assets/img/svgs.svg#{{product.Graphic.Symbol}}">
+  <mat-card *ngFor="let product of Products; let i = index" class="card-space" fxFlex="24" fxFlex.sm="48" [routerLink]="['/product', product.Id]">
+    <div *ngIf="product.IsDiscounted" class="ribbon"><span>{{product.DiscountPercent}}%</span></div>
+    <mat-card-title class="image-{{product.Category.Code | lowercase}}" fxLayout="column" fxLayoutAlign="center center">
+      <div class="svg-container-{{product.Category.Code | lowercase}}">
+        <img src="./assets/img/svgs.svg#{{product.Graphic.Symbol}}">
+      </div>
+      </mat-card-title>
+    <mat-card-content class="m-y-0" fxLayout="column" fxLayoutAlign="space-around center">
+        <div class="product-name">{{product.Name}}</div>
+        <div *ngIf="product.IsDiscounted">
+          <span class="product-price product-discount">{{product.Price | number: '1.2-2'}}PLN</span>
+          <span class="product-price product-discount-price">{{discountedPrice(product) | number: '1.2-2'}}PLN</span>
         </div>
-        </mat-card-title>
-      <mat-card-content class="m-y-0" fxLayout="column" fxLayoutAlign="space-around center">
-          <div class="product-name">{{product.Name}}</div>
-          <div class="product-price">{{product.Price | number: '1.2-2'}}PLN</div>
-      </mat-card-content>
-      <mat-card-actions class="p-y-0" fxLayout="row" fxLayoutAlign="center center">
-        <div class="product-avalibility {{product.Avalibility.Color | lowercase}}" matTooltip="{{product.Avalibility.Description}}" matTooltipPosition="left"></div>
-        <button class="product-wishlist" appClickStopPropagation mat-icon-button matTooltip="Dodaj do Whishlist" matTooltipPosition="right" (click)="addToWishlist(product)">
-          <mat-icon>favorite_border</mat-icon>
-        </button>
-      </mat-card-actions>
+        <div *ngIf="!product.IsDiscounted" class="product-price">{{product.Price | number: '1.2-2'}}PLN</div>
+    </mat-card-content>
+    <mat-card-actions class="p-y-0" fxLayout="row" fxLayoutAlign="center center">
+      <div class="product-avalibility {{product.Avalibility.Color | lowercase}}" matTooltip="{{product.Avalibility.Description}}" matTooltipPosition="left"></div>
+      <button class="product-wishlist" appClickStopPropagation mat-icon-button matTooltip="Dodaj do Whishlist" matTooltipPosition="right" (click)="addToWishlist(product)">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
+    </mat-card-actions>
   </mat-card>
   <div fxFlex="24" fxFlex.sm="48"></div>
   <div fxFlex="24" fxFlex.sm="48"></div>

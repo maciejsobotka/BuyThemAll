@@ -27,6 +27,10 @@ export class ProductsComponent implements OnInit {
     console.log('AddToWishlist');
   }
 
+  discountedPrice(product: IProduct): number {
+    return product.Price - product.Price * product.DiscountPercent / 100;
+  }
+
   goToDetail(product: IProduct) {
     console.log('GoToProduct');
   }

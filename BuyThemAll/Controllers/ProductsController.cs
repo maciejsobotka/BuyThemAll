@@ -12,25 +12,31 @@ namespace BuyThemAll.Controllers
     {
         private readonly BuyThemAllEntities db = new BuyThemAllEntities();
 
-        // GET: api/Products
+        // GET: api/Products/GetProducts
         public IQueryable<Product> GetProducts()
         {
             return db.Products;
         }
 
-        // GET: api/Products
+        // GET: api/Products/GetDiscountedProducts
+        public IQueryable<Product> GetDiscountedProducts()
+        {
+            return db.Products.Where(p => p.IsDiscounted);
+        }
+
+        // GET: api/Products/GetTShirts
         public IQueryable<Product> GetTShirts()
         {
             return db.Products.Where(p => p.Category.Code == "T-SHIRT");
         }
 
-        // GET: api/Products
+        // GET: api/Products/GetMugs
         public IQueryable<Product> GetMugs()
         {
             return db.Products.Where(p => p.Category.Code == "MUG"); ;
         }
 
-        // GET: api/Products
+        // GET: api/Products/GetPosters
         public IQueryable<Product> GetPosters()
         {
             return db.Products.Where(p => p.Category.Code == "POSTER"); ;

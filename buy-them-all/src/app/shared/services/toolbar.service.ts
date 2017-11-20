@@ -34,6 +34,7 @@ export class ToolbarService {
                     path: route.path,
                     title: route.data.title,
                     icon: route.data.icon,
+                    color: route.data.color,
                     hidden: route.data.hidden,
                     noToolbar: route.data.noToolbar,
                     authRequired: route.data.authRequired
@@ -55,6 +56,7 @@ export class ToolbarService {
                 path: cfg.path,
                 title: cfg.data.title,
                 icon: cfg.data.icon,
+                color: cfg.data.color,
                 hidden: cfg.data.hidden,
                 noToolbar: cfg.data.noToolbar,
                 authRequired: cfg.data.authRequired

@@ -19,6 +19,48 @@
     background-position: center center;
 }
 
+.ribbon {
+    position: absolute;
+    right: -5px; top: -5px;
+    z-index: 1;
+    overflow: hidden;
+    width: 150px; height: 150px;
+    text-align: right;
+  }
+  .ribbon span {
+    font-size: 20px;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 28px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    width: 150px;
+    display: block;
+    background: linear-gradient(#F70505 0%, #8F0808 100%);
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+    position: absolute;
+    top: 29px; right: -32px;
+  }
+  .ribbon span::before {
+    content: "";
+    position: absolute; left: 0px; top: 100%;
+    z-index: -1;
+    border-left: 3px solid #8F0808;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #8F0808;
+  }
+  .ribbon span::after {
+    content: "";
+    position: absolute; right: 0px; top: 100%;
+    z-index: -1;
+    border-left: 3px solid transparent;
+    border-right: 3px solid #8F0808;
+    border-bottom: 3px solid transparent;
+    border-top: 3px solid #8F0808;
+  }
+
 .svg-container-t-shirt {
     margin-top: 20%;
     min-width: 40%;
@@ -38,8 +80,16 @@
     padding-bottom: 30%;
 }
 
-.space-bottom {
-    margin-bottom: 8px;
+.card-space {
+    margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+    .card-space {
+        margin-top: 8px;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
 }
 
 .product-name {
@@ -49,6 +99,15 @@
 
 .product-price {
     font-weight: bold;
+}
+
+.product-discount { 
+    color: gray;
+    text-decoration: line-through;
+}
+
+.product-discount-price { 
+    color: rgb(255, 0, 0);
 }
 
 .product-avalibility {

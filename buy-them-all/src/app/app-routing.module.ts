@@ -20,10 +20,18 @@ const routes: Routes = [{
     }
   },
   {
+    path: 'promotions',
+    component: ProductsComponent,
+    data: {
+      title: 'Promocje',
+      color: 'red',
+      api: '/api/Products/GetDiscountedProducts'
+    }
+  },
+  {
     path: 'products',
     component: ProductsComponent,
     data: {
-      icon: 'person',
       title: 'Wszystkie produkty',
       api: '/api/Products/GetProducts'
     }
@@ -32,7 +40,6 @@ const routes: Routes = [{
     path: 't-shirts',
     component: ProductsComponent,
     data: {
-      icon: 'person',
       title: 'Koszulki',
       api: '/api/Products/GetTShirts'
     }
@@ -41,7 +48,6 @@ const routes: Routes = [{
     path: 'mugs',
     component: ProductsComponent,
     data: {
-      icon: 'person',
       title: 'Kubki',
       api: '/api/Products/GetMugs'
     }
