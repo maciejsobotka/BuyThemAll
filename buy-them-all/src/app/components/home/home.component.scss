@@ -1,0 +1,32 @@
+.image {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.5;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    margin-left: 2%;
+    margin-right: 2%;
+    text-transform: uppercase;
+    line-height: 120px;
+}
+
+.image:hover {
+    opacity: 1;
+}
+
+.image-promotions {
+    background-image: url("/assets/img/banners/promotions.png");
+}
+
+.image-t-shirts {
+    background-image: url("/assets/img/banners/t-shirts.png");
+}
+
+.image-mugs{
+    background-image: url("/assets/img/banners/mugs.png");
+}
+
+.image-posters {
+    background-image: url("/assets/img/banners/posters.png");
+}

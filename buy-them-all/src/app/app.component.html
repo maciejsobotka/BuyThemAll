@@ -20,7 +20,7 @@
       </mat-toolbar>
   </ng-container>
   <mat-sidenav-container [ngClass]="{'with-margin': !activeItem.noToolbar}" fullscreen>
-      <mat-sidenav #mainSideNav mode="push" closed>
+      <mat-sidenav #mainSideNav mode="over" closed>
           <mat-nav-list>
               <ng-container *ngFor="let navItem of mainMenuItems">
                   <a *ngIf="!navItem.hidden && (!navItem.authRequired || (navItem.authRequired && authService.isAuthorized))" mat-list-item mat-ripple
