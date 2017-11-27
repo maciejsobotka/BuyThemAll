@@ -70,6 +70,12 @@
     <Compile Include="Category.cs">
       <DependentUpon>BuyThemAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CategoryColor.cs">
+      <DependentUpon>BuyThemAllModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategorySize.cs">
+      <DependentUpon>BuyThemAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Client.cs">
       <DependentUpon>BuyThemAllModel.tt</DependentUpon>
     </Compile>

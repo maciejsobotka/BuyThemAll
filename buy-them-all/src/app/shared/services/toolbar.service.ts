@@ -27,9 +27,6 @@ export class ToolbarService {
         return this.router.config
             .filter(route => route.data && route.data.title)
             .map(route => {
-                if (!route.data.title) {
-                    throw new Error('Missing title for toolbar menu route ' + route.path);
-                }
                 return {
                     path: route.path,
                     title: route.data.title,

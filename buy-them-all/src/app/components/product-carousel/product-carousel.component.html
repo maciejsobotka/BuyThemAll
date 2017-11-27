@@ -1,0 +1,26 @@
+<div id="productCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+
+  <ol class="carousel-indicators">
+    <li *ngFor="let categoryColor of Product?.Category.CategoryColors; let i = index" data-target="#productCarousel" [attr.data-slide-to]="i" [ngClass]="{'active': i === 0}"></li>
+  </ol>
+
+  <div class="carousel-inner">
+    <div *ngFor="let categoryColor of Product?.Category.CategoryColors; let i = index" class="item" [ngClass]="{'active': i === 0}">
+      <div class="image-{{Product?.Category.Code | lowercase}}-{{categoryColor.Code}}">
+        <div class="svg-container-{{Product?.Category.Code | lowercase}}">
+          <img *ngIf="categoryColor.Code !== 'B'" src="./assets/img/svgs.svg#{{Product?.Graphic.Symbol}}">
+          <img *ngIf="categoryColor.Code === 'B'" src="./assets/img/svgs.svg#w{{Product?.Graphic.Symbol}}">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a class="left carousel-control" href="#productCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left chevron"></span>
+      <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#productCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right chevron"></span>
+      <span class="sr-only">Next</span>
+  </a>
+</div>

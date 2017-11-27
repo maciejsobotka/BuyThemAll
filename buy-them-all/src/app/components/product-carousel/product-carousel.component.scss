@@ -1,0 +1,113 @@
+.image-t-shirt-W {
+    background-image: url("/assets/img/products/t-shirtW.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.image-t-shirt-B {
+    background-image: url("/assets/img/products/t-shirtB.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.image-t-shirt-P {
+    background-image: url("/assets/img/products/t-shirtP.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.image-mug-W {
+    background-image: url("/assets/img/products/mugW.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    max-width: 80%;
+    margin-left: 10%;
+}
+
+.image-mug-B {
+    background-image: url("/assets/img/products/mugB.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    max-width: 80%;
+    margin-left: 10%;
+}
+
+.image-mug-R {
+    background-image: url("/assets/img/products/mugR.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    max-width: 80%;
+    margin-left: 10%;
+}
+
+.image-poster-W {
+    background-image: url("/assets/img/products/posterW.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    max-width: 80%;
+    margin-left: 10%;
+}
+
+.image-poster-B {
+    background-image: url("/assets/img/products/posterB.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    max-width: 80%;
+    margin-left: 10%;
+}
+
+  .svg-container-t-shirt {
+    padding-top: 20%;
+    margin-left: 30%;
+    max-width: 40%;
+    padding-bottom: 40%;
+    margin-bottom: 20px;
+}
+
+.svg-container-mug {
+    padding-top: 30%;
+    margin-left: 15%;
+    max-width: 40%;
+    padding-bottom: 30%;
+    margin-bottom: 20px;
+}
+
+.svg-container-poster {
+    margin-top: 5%;
+    padding-top: 25%;
+    margin-left: 30%;
+    max-width: 40%;
+    padding-bottom: 30%;
+    margin-bottom: 20px;
+}
+
+.carousel-indicators {
+    bottom: -10px;
+}
+.carousel-indicators li{
+    border: 1px solid black;
+}
+
+li.active {
+    background-color: black;
+}
+
+.carousel-control.right {
+    background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.2) 100%);
+}
+
+.carousel-control.left {
+    background-image: linear-gradient(to left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.2) 100%);
+}
+
+span.chevron {
+    color: black;
+}

@@ -24,6 +24,7 @@ import { // only import the portions you will use to optimize build (MaterialMod
     MatDialogModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { CarouselModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       MatTooltipModule,
       MatDialogModule,
       MatTabsModule,
-      FlexLayoutModule
+      FlexLayoutModule,
+      CarouselModule
   ],
   exports: [
       MatAutocompleteModule,
@@ -73,7 +75,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       MatTooltipModule,
       MatDialogModule,
       MatTabsModule,
-      FlexLayoutModule
+      FlexLayoutModule,
+      CarouselModule
   ]
 })
 export class AppCommonModule { }

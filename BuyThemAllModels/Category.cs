@@ -14,8 +14,20 @@ namespace BuyThemAllModel
     
     public partial class Category
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Category()
+        {
+            this.CategoryColors = new HashSet<CategoryColor>();
+            this.CategorySizes = new HashSet<CategorySize>();
+        }
+    
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoryColor> CategoryColors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategorySize> CategorySizes { get; set; }
     }
 }

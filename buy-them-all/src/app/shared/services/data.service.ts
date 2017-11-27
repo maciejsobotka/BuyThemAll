@@ -21,4 +21,13 @@ export class DataService {
             return Observable.throw(error.json().error || 'Server error');
         });
   }
+
+  getProduct(prodId: string): Observable<IProduct> {
+    return this.http.get(this.apiHost + '/api/Products/GetProduct/' + prodId)
+        .map((res: Response) => res.json())
+        .catch((error: any) => {
+            console.log(error);
+            return Observable.throw(error.json().error || 'Server error');
+        });
+  }
 }

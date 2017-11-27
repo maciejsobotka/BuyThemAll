@@ -13,6 +13,30 @@ INSERT INTO [dbo].[Category] ([Code], [Name])
 			('POSTER', 'Plakaty')
 GO
 
+INSERT INTO [dbo].[CategoryColor] ([Code] ,[Name] ,[CategoryId])
+     VALUES ('W','WHITE',(SELECT Id FROM [dbo].[Category] WHERE Code = 'T-SHIRT')),
+			('B','BLACK',(SELECT Id FROM [dbo].[Category] WHERE Code = 'T-SHIRT')),
+			('P','PINK',(SELECT Id FROM [dbo].[Category] WHERE Code = 'T-SHIRT')),
+			('W','WHITE',(SELECT Id FROM [dbo].[Category] WHERE Code = 'MUG')),
+			('B','BLACK',(SELECT Id FROM [dbo].[Category] WHERE Code = 'MUG')),
+			('R','RED',(SELECT Id FROM [dbo].[Category] WHERE Code = 'MUG')),
+			('W','WHITE',(SELECT Id FROM [dbo].[Category] WHERE Code = 'POSTER')),
+			('B','BLACK',(SELECT Id FROM [dbo].[Category] WHERE Code = 'POSTER'))
+GO
+
+INSERT INTO [dbo].[CategorySize] ([Code], [Description], [CategoryId])
+     VALUES ('S','34-36',(SELECT Id FROM [dbo].[Category] WHERE Code = 'T-SHIRT')),
+			('M','38-40',(SELECT Id FROM [dbo].[Category] WHERE Code = 'T-SHIRT')),
+			('L','42-44',(SELECT Id FROM [dbo].[Category] WHERE Code = 'T-SHIRT')),
+			('XL','46-48',(SELECT Id FROM [dbo].[Category] WHERE Code = 'T-SHIRT')),
+			('M','330 ml',(SELECT Id FROM [dbo].[Category] WHERE Code = 'MUG')),
+			('L','440 ml',(SELECT Id FROM [dbo].[Category] WHERE Code = 'MUG')),
+			('XL','550 ml',(SELECT Id FROM [dbo].[Category] WHERE Code = 'MUG')),
+			('A4','210×297 mm',(SELECT Id FROM [dbo].[Category] WHERE Code = 'POSTER')),
+			('A3','297x420 mm',(SELECT Id FROM [dbo].[Category] WHERE Code = 'POSTER')),
+			('A2','420x594 mm',(SELECT Id FROM [dbo].[Category] WHERE Code = 'POSTER'))
+GO
+
 INSERT INTO [dbo].[Manufacturer] ([Name])
      VALUES ('Fogliolia'),
 			('Zacruibos'),

@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ProductCarouselComponent } from './components/product-carousel/product-carousel.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     AppComponent,
     HomeComponent,
     ProductsComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ProductCarouselComponent
   ],
   imports: [
     BrowserModule,
