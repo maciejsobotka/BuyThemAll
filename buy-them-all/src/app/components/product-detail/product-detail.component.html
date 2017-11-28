@@ -1,8 +1,39 @@
 <div  fxLayout="row"
       fxLayout.xs="column"
-      fxLayoutAlign="center start"
-      fxLayoutAlign.xs=" strech"
+      fxLayoutAlign="space-around start"
+      fxLayoutAlign.xs="start stretch"
       fxLayoutWrap
       fxLayoutWrap.xs="nowrap">
-  <app-product-carousel [Product]="Product" fxFlex="50"></app-product-carousel>
+  <app-product-carousel [Product]="Product" fxFlex="45"></app-product-carousel>
+  <div class="p-x-lg" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.xs="space-around center" fxFlex="45">
+    <div class="p-y-sm" fxLayout="column" fxLayoutAlign.xs="start center">
+      <div class="product-name p-b-xs">{{Product?.Name}}</div>
+      <div *ngIf="Product?.IsDiscounted">
+        <div>
+          <span class="product-price product-discount">{{Product?.Price | number: '1.2-2'}}PLN</span>
+          <span class="product-price product-discount-price">{{discountedPrice(Product) | number: '1.2-2'}}PLN</span>
+          <span class="product-discount-label">-{{Product?.DiscountPercent}}%</span>
+        </div>
+      </div>
+      <div *ngIf="!Product?.IsDiscounted" class="product-price">{{Product?.Price | number: '1.2-2'}}PLN</div>
+    </div>
+    <div class="p-b-sm" fxLayout="column" fxLayoutAlign.xs="center center">
+      <div class="toggle-label p-b-xs">Wybierz rozmiar:</div>
+      <mat-button-toggle-group #groupSize="matButtonToggleGroup">
+        <mat-button-toggle *ngFor="let categorySize of Product?.Category.CategorySizes" value="categorySize">
+          {{categorySize.Code}}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="p-b-sm" fxLayout="column" fxLayoutAlign.xs="center center">
+      <div class="toggle-label p-b-xs">Wybierz kolor:</div>
+      <mat-button-toggle-group #groupColor="matButtonToggleGroup">
+        <mat-button-toggle *ngFor="let categoryColor of Product?.Category.CategoryColors" [value]="categoryColor"
+          class="color-toggle {{categoryColor.Code}}" [ngClass]="{'checked': groupColor.value === categoryColor}">
+          <div class="toggle-empty"></div>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+      {{groupColor?.value?.Code}}
+    </div>
+  </div>
 </div>

@@ -5,7 +5,7 @@
       fxLayoutWrap
       fxLayoutWrap.xs="nowrap">
   <mat-card *ngFor="let product of Products; let i = index" class="card-space" fxFlex="24" fxFlex.sm="48" [routerLink]="['/product', product.Id]">
-    <div [class.hidden]="!product.IsDiscounted" class="ribbon"><span *ngIf="product.IsDiscounted">{{product.DiscountPercent}}%</span></div>
+    <div [class.hidden]="!product.IsDiscounted" class="ribbon"><span *ngIf="product.IsDiscounted">-{{product.DiscountPercent}}%</span></div>
     <mat-card-title class="image-{{product.Category.Code | lowercase}}" fxLayout="column" fxLayoutAlign="center center">
       <div class="svg-container-{{product.Category.Code | lowercase}}">
         <img src="./assets/img/svgs.svg#{{product.Graphic.Symbol}}">
