@@ -1,9 +1,10 @@
-<div  fxLayout="row"
-      fxLayout.xs="column"
-      fxLayoutAlign="space-around start"
-      fxLayoutAlign.xs="start stretch"
-      fxLayoutWrap
-      fxLayoutWrap.xs="nowrap">
+<div class.lg="m-t-lg p-t-lg" class.md="m-t-lg p-t-lg" class.sm="m-t-lg"
+     fxLayout="row"
+     fxLayout.xs="column"
+     fxLayoutAlign="space-around start"
+     fxLayoutAlign.xs="start stretch"
+     fxLayoutWrap
+     fxLayoutWrap.xs="nowrap">
   <app-product-carousel [Product]="Product" fxFlex="45"></app-product-carousel>
   <div class="p-x-lg" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.xs="space-around center" fxFlex="45">
     <div class="p-y-sm" fxLayout="column" fxLayoutAlign.xs="start center">
@@ -17,23 +18,35 @@
       </div>
       <div *ngIf="!Product?.IsDiscounted" class="product-price">{{Product?.Price | number: '1.2-2'}}PLN</div>
     </div>
-    <div class="p-b-sm" fxLayout="column" fxLayoutAlign.xs="center center">
-      <div class="toggle-label p-b-xs">Wybierz rozmiar:</div>
-      <mat-button-toggle-group #groupSize="matButtonToggleGroup">
-        <mat-button-toggle *ngFor="let categorySize of Product?.Category.CategorySizes" value="categorySize">
-          {{categorySize.Code}}
-        </mat-button-toggle>
-      </mat-button-toggle-group>
-    </div>
-    <div class="p-b-sm" fxLayout="column" fxLayoutAlign.xs="center center">
-      <div class="toggle-label p-b-xs">Wybierz kolor:</div>
-      <mat-button-toggle-group #groupColor="matButtonToggleGroup">
-        <mat-button-toggle *ngFor="let categoryColor of Product?.Category.CategoryColors" [value]="categoryColor"
-          class="color-toggle {{categoryColor.Code}}" [ngClass]="{'checked': groupColor.value === categoryColor}">
-          <div class="toggle-empty"></div>
-        </mat-button-toggle>
-      </mat-button-toggle-group>
-      {{groupColor?.value?.Code}}
-    </div>
+    <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.xs="space-around center">
+      <div class="p-b-sm" fxLayout="column" fxLayoutAlign.xs="center center">
+        <div class="toggle-label p-b-xs">Wybierz rozmiar:</div>
+        <mat-button-toggle-group #groupSize="matButtonToggleGroup" formControlName="productSize">
+          <mat-button-toggle *ngFor="let categorySize of Product?.Category.CategorySizes" value="categorySize">
+            {{categorySize.Code}}
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+        <mat-error *ngIf="productSize.dirty && productSize.hasError('required')">
+          Wybierz rozmiar
+        </mat-error>
+      </div>
+      <div class="p-b-sm" fxLayout="column" fxLayoutAlign.xs="center center">
+        <div class="toggle-label p-b-xs">Wybierz kolor:</div>
+        <mat-button-toggle-group #groupColor="matButtonToggleGroup" formControlName="productColor">
+          <mat-button-toggle *ngFor="let categoryColor of Product?.Category.CategoryColors" [value]="categoryColor"
+            class="color-toggle {{categoryColor.Code}}" [ngClass]="{'checked': groupColor.value === categoryColor}">
+            <div class="toggle-empty"></div>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+        <mat-error *ngIf="productColor.dirty && productColor.hasError('required')">
+          Wybierz kolor
+        </mat-error>
+      </div>
+      <div fxLayout="column" fxLayoutAlign=" stretch">
+        <button mat-button class="m-t-md m-b-sm" (click)="addToCart()"><mat-icon>shopping_cart</mat-icon> Dodaj do koszyka</button>
+        <button mat-button class="m-b-md" (click)="addToWhishlist()"><mat-icon>favorite</mat-icon> Dodaj do Wishlist</button>
+      </div>
+    </form>
+    <mat-card class="product-description m-t-sm">{{Product?.Description}}</mat-card>
   </div>
 </div>

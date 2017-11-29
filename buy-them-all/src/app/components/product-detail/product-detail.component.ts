@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DataService } from '../../shared/services/data.service';
 import { IProduct } from '../../shared/models/product';
@@ -16,6 +17,15 @@ import 'rxjs/add/operator/switchMap';
 export class ProductDetailComponent implements OnInit {
   Product: IProduct;
 
+  form = new FormGroup({
+    productSize: new FormControl('', Validators.required),
+    productColor: new FormControl('', Validators.required)
+  });
+
+  get productSize() { return this.form.get('productSize'); }
+
+  get productColor() { return this.form.get('productColor'); }
+
   constructor(private route: ActivatedRoute, private dataService: DataService, private titleService: Title) { }
 
   ngOnInit() {
@@ -30,6 +40,28 @@ export class ProductDetailComponent implements OnInit {
   discountedPrice(product: IProduct): number {
     if (DataHelper.hasValue(product)) {
       return product.Price - product.Price * product.DiscountPercent / 100;
+    }
+  }
+
+  validateForm(): boolean {
+    if (this.form.valid) {
+      return true;
+    } else {
+      const keys = Object.keys(this.form.controls);
+      keys.forEach( k => this.form.controls[k].markAsDirty());
+      return false;
+    }
+  }
+
+  addToCart() {
+    if (this.validateForm()) {
+      console.log('form valid');
+    }
+  }
+
+  addToWhishlist() {
+    if (this.validateForm()) {
+      console.log('form valid');
     }
   }
 }

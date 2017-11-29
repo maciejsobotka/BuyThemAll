@@ -2,6 +2,11 @@ mat-button-toggle {
     color: black;
 }
 
+mat-button-toggle:hover {
+    background-color: black;
+    color: white;
+}
+
 mat-button-toggle.mat-button-toggle-checked {
     background-color: black;
     color: white;
@@ -19,8 +24,13 @@ mat-button-toggle.mat-button-toggle-checked {
     height: 36px;
     width: 36px;
     border: 6px solid white;
+    border-radius: 2px;
     cursor: pointer;
     z-index: 999;
+}
+
+.color-toggle:hover {
+    border-color: black !important;
 }
 
 .color-toggle.B {
@@ -48,6 +58,25 @@ mat-button-toggle.mat-button-toggle-checked {
     font-size: small;
 }
 
+mat-error {
+    padding-top: 4px;
+    font-weight: 100;
+}
+
+.mat-button {
+    text-transform: uppercase;
+    font-weight: 700;
+    background: black;
+    color: white;
+    border-radius: 0;
+    padding: 5px 50px;
+}
+
+.mat-button:hover {
+    background: rgb(6, 161, 65);
+    color: white;
+}
+
 .product-name {
     font-size: 20px;
     font-weight: 700;
@@ -72,4 +101,13 @@ mat-button-toggle.mat-button-toggle-checked {
     background-color: rgb(255, 0, 0);
     padding: 2px 6px 2px 6px;
     border-radius: 4px;
+}
+
+.product-description {
+    text-align: justify;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.20);
+}
+
+.mat-card {
+    padding: 10px;
 }
