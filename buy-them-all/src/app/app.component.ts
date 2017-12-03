@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { ToolbarService } from './shared/services/toolbar.service';
 import { AuthService } from './shared/services/auth.service';
+import { CartService } from './shared/services/cart.service';
 
 import { IMenuItem } from './shared/models/menu-item';
 
@@ -21,7 +22,7 @@ export class AppComponent {
         this.authService.logOut().subscribe(() => this.authService.removeToken());
     }
 
-    constructor(private authService: AuthService, private toolbarService: ToolbarService) {
+    constructor(private authService: AuthService, private toolbarService: ToolbarService, private cartService: CartService) {
         this.mainMenuItems = this.toolbarService.getMenuItems();
         this.activeMenuItem$ = this.toolbarService.activeMenuItem$;
     }

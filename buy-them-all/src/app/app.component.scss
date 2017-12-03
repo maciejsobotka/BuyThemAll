@@ -6,3 +6,18 @@
 .nav-item-red {
     color: rgb(255, 59, 59);
 }
+
+.menu-count-items {
+    position: absolute;
+    top: 20px;
+    right: 2px;
+    width: 16px;
+    height: 16px;
+    color: black;
+    background-color: white;
+    line-height: 14px;
+    text-align: center;
+    font-size: 11px;
+    border-radius: 8px;
+    border: 1px solid black;
+}

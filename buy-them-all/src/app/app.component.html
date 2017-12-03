@@ -11,11 +11,13 @@
           <button mat-icon-button>
               <mat-icon>search</mat-icon>
           </button>
-          <button mat-icon-button>
+          <button mat-icon-button [routerLink]="['\wishlist']">
             <mat-icon>favorite</mat-icon>
+            <span *ngIf="cartService.WishlistSize" class="menu-count-items">{{cartService.WishlistSize}}</span>
         </button>
-        <button mat-icon-button>
+        <button mat-icon-button [routerLink]="['\cart']">
             <mat-icon>shopping_cart</mat-icon>
+            <span *ngIf="cartService.CartSize" class="menu-count-items">{{cartService.CartSize}}</span>
         </button>
       </mat-toolbar>
   </ng-container>

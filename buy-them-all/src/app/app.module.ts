@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './shared/services/auth.service';
 import { DataService } from './shared/services/data.service';
 import { ToolbarService } from './shared/services/toolbar.service';
+import { CartService } from './shared/services/cart.service';
 
 import { ClickStopPropagationDirective } from './shared/directives/click-stop-propagation.directive';
 
@@ -19,6 +20,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductCarouselComponent } from './components/product-carousel/product-carousel.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 @NgModule({
@@ -28,7 +31,9 @@ import { ProductCarouselComponent } from './components/product-carousel/product-
     HomeComponent,
     ProductsComponent,
     ProductDetailComponent,
-    ProductCarouselComponent
+    ProductCarouselComponent,
+    WishlistComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,8 @@ import { ProductCarouselComponent } from './components/product-carousel/product-
   providers: [
     AuthService,
     DataService,
-    ToolbarService
+    ToolbarService,
+    CartService
   ],
   bootstrap: [AppComponent]
 })

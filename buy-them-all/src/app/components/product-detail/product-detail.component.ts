@@ -4,10 +4,12 @@ import { Title } from '@angular/platform-browser';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DataService } from '../../shared/services/data.service';
+import { CartService } from '../../shared/services/cart.service';
 import { IProduct } from '../../shared/models/product';
 import { DataHelper } from '../../shared/utils/data-helper';
 
 import 'rxjs/add/operator/switchMap';
+
 
 @Component({
   selector: 'app-product-detail',
@@ -26,7 +28,10 @@ export class ProductDetailComponent implements OnInit {
 
   get productColor() { return this.form.get('productColor'); }
 
-  constructor(private route: ActivatedRoute, private dataService: DataService, private titleService: Title) { }
+  constructor(private route: ActivatedRoute,
+    private titleService: Title,
+    private dataService: DataService,
+    private cartService: CartService) { }
 
   ngOnInit() {
     this.route.paramMap.switchMap((params: ParamMap) =>
@@ -55,13 +60,17 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart() {
     if (this.validateForm()) {
-      console.log('form valid');
+      this.Product.Color = this.productColor.value;
+      this.Product.Size = this.productSize.value;
+      this.cartService.addToCart(this.Product);
     }
   }
 
   addToWhishlist() {
     if (this.validateForm()) {
-      console.log('form valid');
+      this.Product.Color = this.productColor.value;
+      this.Product.Size = this.productSize.value;
+      this.cartService.addToWishlist(this.Product);
     }
   }
 }

@@ -6,7 +6,7 @@
      fxLayoutWrap
      fxLayoutWrap.xs="nowrap">
   <app-product-carousel [Product]="Product" fxFlex="45"></app-product-carousel>
-  <div class="p-x-lg" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.xs="space-around center" fxFlex="45">
+  <div class.lg="p-x-lg" class.md="p-x-lg" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.xs="space-around center" fxFlex="45">
     <div class="p-y-sm" fxLayout="column" fxLayoutAlign.xs="start center">
       <div class="product-name p-b-xs">{{Product?.Name}}</div>
       <div *ngIf="Product?.IsDiscounted">
@@ -18,11 +18,11 @@
       </div>
       <div *ngIf="!Product?.IsDiscounted" class="product-price">{{Product?.Price | number: '1.2-2'}}PLN</div>
     </div>
-    <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.xs="space-around center">
+    <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.xs="space-around center" fxFlex="45">
       <div class="p-b-sm" fxLayout="column" fxLayoutAlign.xs="center center">
         <div class="toggle-label p-b-xs">Wybierz rozmiar:</div>
         <mat-button-toggle-group #groupSize="matButtonToggleGroup" formControlName="productSize">
-          <mat-button-toggle *ngFor="let categorySize of Product?.Category.CategorySizes" value="categorySize">
+          <mat-button-toggle *ngFor="let categorySize of Product?.Category.CategorySizes" [value]="categorySize">
             {{categorySize.Code}}
           </mat-button-toggle>
         </mat-button-toggle-group>

@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [{
     path: '',
@@ -16,6 +18,22 @@ const routes: Routes = [{
     data: {
       icon: 'home',
       title: 'A Shop',
+      hidden: true
+    }
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
+    data: {
+      title: 'Koszyk',
+      hidden: true
+    }
+  },
+  {
+    path: 'wishlist',
+    component: WishlistComponent,
+    data: {
+      title: 'Wishlist',
       hidden: true
     }
   },
