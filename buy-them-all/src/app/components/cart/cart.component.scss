@@ -1,0 +1,203 @@
+.cart-title {
+    font-weight: 100;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px dashed black;
+}
+
+.cart-empty {
+    margin-top: 50%;
+    text-align: center;
+}
+
+mat-card {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 4px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 20%;
+    margin-right: 20%; 
+    cursor: pointer;
+}
+
+@media (max-width: 960px) {
+    mat-card {
+        margin-left: 10%;
+        margin-right: 10%; 
+    }
+}
+
+@media (max-width: 600px) {
+    mat-card {
+        margin-left: 2%;
+        margin-right: 2%; 
+    }
+}
+
+.image {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: 100px;
+}
+
+    .image.t-shirt-W {
+        background-image: url("/assets/img/products/t-shirtW.jpg");
+    }
+    
+    .image.t-shirt-B {
+        background-image: url("/assets/img/products/t-shirtB.jpg");
+    }
+    
+    .image.t-shirt-P {
+        background-image: url("/assets/img/products/t-shirtP.jpg");
+    }
+    
+    .image.mug-W {
+        background-image: url("/assets/img/products/mugW.jpg");
+    }
+    
+    .image.mug-B {
+        background-image: url("/assets/img/products/mugB.jpg");
+    }
+    
+    .image.mug-R {
+        background-image: url("/assets/img/products/mugR.jpg");
+    }
+    
+    .image.poster-W {
+        background-image: url("/assets/img/products/posterW.jpg");
+    }
+    
+    .image.poster-B {
+        background-image: url("/assets/img/products/posterB.jpg");
+    }
+    
+
+.svg-container-t-shirt {
+    padding-top: 30%;
+    margin-left: 30%;
+    max-width: 40%;
+    padding-bottom: 40%;
+    margin-bottom: 20px;
+}
+
+.svg-container-mug {
+    padding-top: 40%;
+    margin-left: 15%;
+    max-width: 40%;
+    padding-bottom: 30%;
+    margin-bottom: 20px;
+}
+
+.svg-container-poster {
+    margin-top: 5%;
+    padding-top: 35%;
+    margin-left: 30%;
+    max-width: 40%;
+    padding-bottom: 30%;
+    margin-bottom: 20px;
+}
+
+.product-name {
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.product-info {
+    font-size: 12px;
+}
+
+.product-price {
+    font-weight: 700;
+}
+
+.product-avalibility-text {
+    font-size: 10px;
+}
+
+.product-avalibility {
+    height:9px;
+    width: 9px;
+    border-radius: 50%;
+    margin-right: 2px;
+}
+    .product-avalibility.green {
+        border: 1px solid rgb(36, 197, 36);
+        background-color: rgb(36, 197, 36);
+    }
+
+    .product-avalibility.yellow {
+        border: 1px solid rgb(241, 209, 0);
+        background-color: rgb(241, 209, 0);
+    }
+
+    .product-avalibility.red {
+        border: 1px solid rgb(192, 5, 5);
+        background-color: rgb(192, 5, 5);
+    }
+
+@media (max-width: 600px) {
+    .buttons-container {
+        min-width: 50px;
+    }
+
+    .remove {
+        position: absolute;
+        top: 6px;
+        right: 4px;
+    }
+}
+
+.checkout {
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: black;
+    color: white;
+    border-radius: 0;
+    padding: 5px 0;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 2%;
+}
+
+.checkout:hover {
+    background-color: rgb(6, 161, 65);
+}
+
+.order-price {
+    font-weight: 700;
+    text-align: right;
+    margin: 5% 20%;
+}
+
+@media (max-width: 960px) {
+    .checkout {
+        margin-left: 10%;
+        margin-right: 10%; 
+    }
+
+    .order-price {
+        margin: 2% 10%;
+    }
+}
+
+@media (max-width: 600px) {
+    .checkout {
+        position: -webkit-sticky;
+        position: sticky;
+        width: 100%;
+        bottom: 0;
+        margin: 0;
+    }
+    
+    .order-price {
+        margin: 2% 2%;
+    }
+}

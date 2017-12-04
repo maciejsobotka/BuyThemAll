@@ -1,3 +1,43 @@
-<p>
-  cart works!
-</p>
+<div class="cart-title">Twój koszyk</div>
+<div *ngIf="!Products || Products.length === 0" class="cart-empty">
+  Koszyk jest pusty
+</div>
+<div fxLayout="column"
+    fxLayoutAlign="space-between stretch">
+  <mat-card *ngFor="let product of Products; let i = index" [routerLink]="['/product', product.Id]" fxFlex="90">
+    <mat-card-content class="m-y-0" fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex></div>
+      <div class="image {{product.Category.Code | lowercase}}-{{product.Color.Code}}" fxFlex="24">
+        <div class="svg-container-{{product.Category.Code | lowercase}}">
+          <img *ngIf="product.Color.Code !== 'B'" src="./assets/img/svgs.svg#{{product.Graphic.Symbol}}">
+          <img *ngIf="product.Color.Code === 'B'" src="./assets/img/svgs.svg#w{{product.Graphic.Symbol}}">
+        </div>
+      </div>
+      <div fxFlex></div>
+      <div>
+        <div class="product-name">{{product.Name}}</div>
+        <div class="product-avalibility-text" fxLayout="row" fxLayoutAlign="start center">
+            <div class="product-avalibility {{product.Avalibility.Color | lowercase}}"></div>
+            {{product.Avalibility.Description}}
+          </div>
+        <div class="product-info">{{product.Size.Code}} ({{product.Size.Description}})</div>
+        <div class="product-info">{{product.Color.Name}}</div>
+        <div class="product-price">{{productPrice(product) | number: '1.2-2'}}PLN</div>
+      </div>
+      <div fxFlex></div>
+      <div fxFlex></div>
+      <div class="buttons-container">
+        <button mat-icon-button appClickStopPropagation class="remove" (click)="removeItem(i)">
+            <mat-icon>clear</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <ng-container *ngIf="Products && Products.length > 0">
+    <div class="order-price">RAZEM: {{orderPrice() | number: '1.2-2'}}PLN</div>
+    <button mat-button class="checkout" (click)="proceedToCheckout()">
+      <ng-container *ngIf="IsScreenXs">{{orderPrice() | number: '1.2-2'}}PLN | </ng-container>
+      Złóż zamówienie
+    </button>
+  </ng-container>
+</div>

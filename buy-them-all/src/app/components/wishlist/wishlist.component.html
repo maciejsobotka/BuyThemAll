@@ -1,5 +1,5 @@
 <div class="wishlist-title">Wishlist</div>
-<div *ngIf="Products && Products.length === 0" class="wishlist-empty">
+<div *ngIf="!Products || Products.length === 0" class="wishlist-empty">
   Wishlist jest puste
 </div>
 <div fxLayout="column"
@@ -9,7 +9,8 @@
         <div fxFlex></div>
       <div class="image {{product.Category.Code | lowercase}}-{{product.Color.Code}}" fxFlex="24">
         <div class="svg-container-{{product.Category.Code | lowercase}}">
-          <img src="./assets/img/svgs.svg#{{product.Graphic.Symbol}}">
+          <img *ngIf="product.Color.Code !== 'B'" src="./assets/img/svgs.svg#{{product.Graphic.Symbol}}">
+          <img *ngIf="product.Color.Code === 'B'" src="./assets/img/svgs.svg#w{{product.Graphic.Symbol}}">
         </div>
       </div>
       <div fxFlex></div>
