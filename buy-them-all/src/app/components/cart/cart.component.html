@@ -35,7 +35,7 @@
   </mat-card>
   <ng-container *ngIf="Products && Products.length > 0">
     <div class="order-price">RAZEM: {{orderPrice() | number: '1.2-2'}}PLN</div>
-    <button mat-button class="checkout" (click)="proceedToCheckout()">
+    <button mat-button class="checkout" [routerLink]="['/checkout']">
       <ng-container *ngIf="IsScreenXs">{{orderPrice() | number: '1.2-2'}}PLN | </ng-container>
       Złóż zamówienie
     </button>

@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { IProduct } from '../models/product';
+import { IVoivodeship } from '../models/voivodeship';
 
 @Injectable()
 export class DataService {
@@ -29,5 +30,14 @@ export class DataService {
             console.log(error);
             return Observable.throw(error.json().error || 'Server error');
         });
+  }
+
+  getVoivodeships(): Observable<IVoivodeship[]> {
+    return this.http.get(this.apiHost + '/api/Voivodeships/GetVoivodeships')
+    .map((res: Response) => res.json())
+    .catch((error: any) => {
+        console.log(error);
+        return Observable.throw(error.json().error || 'Server error');
+    });
   }
 }

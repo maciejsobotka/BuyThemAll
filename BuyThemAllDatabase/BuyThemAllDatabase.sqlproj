@@ -68,7 +68,6 @@
     <Build Include="OrderProduct.sql" />
     <Build Include="Order.sql" />
     <Build Include="Voivodeship.sql" />
-    <Build Include="ClientAddress.sql" />
     <Build Include="Avalibility.sql" />
     <None Include="Scripts\InsertEnums.sql" />
     <None Include="Scripts\InsertProducts.sql" />

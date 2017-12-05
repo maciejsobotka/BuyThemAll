@@ -1,0 +1,28 @@
+.form-card {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 2%;
+}
+
+.proceed-button {
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: black;
+    color: white;
+    border-radius: 0;
+    padding: 5px 30px;
+}
+
+@media (max-width: 960px) {
+    .form-card {
+        margin-left: 20%;
+        margin-right: 20%; 
+    }
+}
+
+@media (max-width: 600px) {
+    .form-card {
+        margin-left: 2%;
+        margin-right: 2%; 
+    }
+}

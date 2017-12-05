@@ -70,3 +70,22 @@ INSERT INTO [dbo].[Graphic] ([Symbol], [Name])
 			('svg_19', 'Uwaga szk³o'),
 			('svg_20', 'Do utylizacji')
 GO
+
+INSERT INTO [dbo].[Voivodeship] ([Symbol], [Name])
+     VALUES ('D', 'dolnoœl¹skie'),
+			('C', 'kujawsko-pomorskie'),
+			('L', 'lubelskie'),
+			('F', 'lubuskie'),
+			('E', '³ódzkie'),
+			('K', 'ma³opolskie'),
+			('W', 'mazowieckie'),
+			('O', 'opolskie'),
+			('R', 'podkarpackie'),
+			('B', 'podlaskie'),
+			('G', 'pomorskie'),
+			('S', 'œl¹skie'),
+			('T', 'œwiêtokrzyskie'),
+			('N', 'warmiñsko-mazurskie'),
+			('P', 'wielkopolskie'),
+			('Z', 'zachodniopomorskie')
+GO

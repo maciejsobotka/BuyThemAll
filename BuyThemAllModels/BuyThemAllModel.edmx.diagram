@@ -8,20 +8,15 @@
         <EntityTypeShape EntityType="BuyThemAllModel.Address" Width="1.5" PointX="11.125" PointY="0.75" />
         <EntityTypeShape EntityType="BuyThemAllModel.Avalibility" Width="1.5" PointX="0.75" PointY="5" />
         <EntityTypeShape EntityType="BuyThemAllModel.Category" Width="1.5" PointX="3.625" PointY="5" />
-        <EntityTypeShape EntityType="BuyThemAllModel.Client" Width="1.5" PointX="6.25" PointY="4.375" />
-        <EntityTypeShape EntityType="BuyThemAllModel.ClientAddress" Width="1.5" PointX="8.625" PointY="4.375" />
+        <EntityTypeShape EntityType="BuyThemAllModel.Client" Width="1.5" PointX="8.25" PointY="4.25" />
         <EntityTypeShape EntityType="BuyThemAllModel.Graphic" Width="1.5" PointX="0.5" PointY="2.625" />
         <EntityTypeShape EntityType="BuyThemAllModel.Manufacturer" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="BuyThemAllModel.Order" Width="1.5" PointX="8.125" PointY="0.625" />
-        <EntityTypeShape EntityType="BuyThemAllModel.OrderProduct" Width="1.5" PointX="5.125" PointY="1.375" />
+        <EntityTypeShape EntityType="BuyThemAllModel.OrderProduct" Width="1.5" PointX="5.5" PointY="1.375" />
         <EntityTypeShape EntityType="BuyThemAllModel.Product" Width="1.5" PointX="2.875" PointY="0.5" />
-        <EntityTypeShape EntityType="BuyThemAllModel.Voivodeship" Width="1.5" PointX="11.75" PointY="4.625" />
-        <AssociationConnector Association="BuyThemAllModel.FK_Address_Voivodeship" />
-        <AssociationConnector Association="BuyThemAllModel.FK_ClientAddress_Address" />
         <AssociationConnector Association="BuyThemAllModel.FK_Order_Address" />
         <AssociationConnector Association="BuyThemAllModel.FK_Product_Avalibility" />
         <AssociationConnector Association="BuyThemAllModel.FK_Product_Category" />
-        <AssociationConnector Association="BuyThemAllModel.FK_ClientAddress_Clinet" />
         <AssociationConnector Association="BuyThemAllModel.FK_Order_Client" />
         <AssociationConnector Association="BuyThemAllModel.FK_Product_Graphic" />
         <AssociationConnector Association="BuyThemAllModel.FK_Product_Manufacturer" />
@@ -31,6 +26,9 @@
         <EntityTypeShape EntityType="BuyThemAllModel.CategorySize" Width="1.5" PointX="2.125" PointY="7.375" />
         <AssociationConnector Association="BuyThemAllModel.FK_CategoryColor_Cateogry" />
         <AssociationConnector Association="BuyThemAllModel.FK_CategorySize_Cateogry" />
+        <AssociationConnector Association="BuyThemAllModel.FK_Address_Client" />
+        <EntityTypeShape EntityType="BuyThemAllModel.Voivodeship" Width="1.5" PointX="12.125" PointY="4.875" />
+        <AssociationConnector Association="BuyThemAllModel.FK_Address_Voivodeship" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

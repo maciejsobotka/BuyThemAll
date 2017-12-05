@@ -14,24 +14,14 @@ namespace BuyThemAllModel
     
     public partial class Address
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Address()
-        {
-            this.ClientAddresses = new HashSet<ClientAddress>();
-            this.Orders = new HashSet<Order>();
-        }
-    
         public int Id { get; set; }
         public string Street { get; set; }
         public int HouseNo { get; set; }
         public int ApartmentNo { get; set; }
         public string City { get; set; }
-        public Nullable<int> VoivodeshipId { get; set; }
+        public int VoivodeshipId { get; set; }
+        public int ClientId { get; set; }
     
         public virtual Voivodeship Voivodeship { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClientAddress> ClientAddresses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

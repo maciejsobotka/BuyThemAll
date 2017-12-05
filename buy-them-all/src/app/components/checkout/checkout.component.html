@@ -1,0 +1,66 @@
+<mat-card class="form-card">
+  <form [formGroup]="checkoutForm" fxLayout="column" fxLayoutGap="6px" fxLayoutAlign="center center">
+      <mat-input-container>
+          <input matInput placeholder="Imię" formControlName="name">
+          <mat-error *ngIf="checkoutForm.get('name').hasError('required')">
+              Imię jest <strong>wymagane</strong>
+          </mat-error>
+      </mat-input-container>
+      <mat-input-container>
+          <input matInput placeholder="Nazwisko" formControlName="surname">
+          <mat-error *ngIf="checkoutForm.get('surname').hasError('required')">
+              Nazwisko jest <strong>wymagane</strong>
+          </mat-error>
+      </mat-input-container>
+      <mat-input-container>
+          <input matInput placeholder="E-mail" formControlName="email">
+          <mat-error *ngIf="checkoutForm.get('email').hasError('pattern')">
+              Wpisz prawidłowy adres e-mail
+          </mat-error>
+          <mat-error *ngIf="checkoutForm.get('email').hasError('required')">
+              Email jest <strong>wymagany</strong>
+          </mat-error>
+      </mat-input-container>
+      <mat-input-container>
+          <input matInput placeholder="Telefon" formControlName="phone">
+          <mat-error *ngIf="checkoutForm.get('phone').hasError('pattern')">
+              Wpisz prawidłowy numer telefonu
+          </mat-error>
+          <mat-error *ngIf="checkoutForm.get('phone').hasError('required')">
+              Telefon jest <strong>wymagany</strong>
+          </mat-error>
+      </mat-input-container>
+      <mat-input-container>
+          <input matInput placeholder="Adres" formControlName="address">
+          <mat-error *ngIf="checkoutForm.get('address').hasError('required')">
+              Adres jest <strong>wymagany</strong>
+          </mat-error>
+      </mat-input-container>
+      <mat-input-container>
+          <input matInput placeholder="Kod pocztowy" formControlName="zipCode">
+          <mat-error *ngIf="checkoutForm.get('zipCode').hasError('pattern')">
+              Wpisz prawidłowy kod pocztowy
+          </mat-error>
+          <mat-error *ngIf="checkoutForm.get('zipCode').hasError('required')">
+              Kod pocztowy jest <strong>wymagany</strong>
+          </mat-error>
+      </mat-input-container>
+      <mat-input-container>
+          <input matInput placeholder="Miasto" formControlName="city">
+          <mat-error *ngIf="checkoutForm.get('city').hasError('required')">
+              Adres jest <strong>wymagany</strong>
+          </mat-error>
+      </mat-input-container>
+      <mat-form-field>
+          <mat-select placeholder="Województwo" formControlName="voivodeship">
+            <mat-option *ngFor="let voivodeship of Voivodeships" [value]="voivodeship.Id">
+              {{ voivodeship.Name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="checkoutForm.get('voivodeship').hasError('required')">
+            Województwo jest <strong>wymagane</strong>
+        </mat-error>
+        </mat-form-field>
+      <button mat-button class="proceed-button">Kontynuuj</button>
+  </form>
+</mat-card>

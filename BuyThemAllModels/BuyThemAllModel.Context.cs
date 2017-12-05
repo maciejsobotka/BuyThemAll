@@ -29,14 +29,13 @@ namespace BuyThemAllModel
         public virtual DbSet<Avalibility> Avalibilities { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
-        public virtual DbSet<ClientAddress> ClientAddresses { get; set; }
         public virtual DbSet<Graphic> Graphics { get; set; }
         public virtual DbSet<Manufacturer> Manufacturers { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderProduct> OrderProducts { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Voivodeship> Voivodeships { get; set; }
         public virtual DbSet<CategoryColor> CategoryColors { get; set; }
         public virtual DbSet<CategorySize> CategorySizes { get; set; }
+        public virtual DbSet<Voivodeship> Voivodeships { get; set; }
     }
 }

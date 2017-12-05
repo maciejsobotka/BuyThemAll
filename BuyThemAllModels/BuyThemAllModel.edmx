@@ -5,6 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BuyThemAllModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="Id" />
@@ -14,7 +20,8 @@
           <Property Name="HouseNo" Type="int" Nullable="false" />
           <Property Name="ApartmentNo" Type="int" Nullable="false" />
           <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="VoivodeshipId" Type="int" />
+          <Property Name="VoivodeshipId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Avalibility">
           <Key>
@@ -59,14 +66,6 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ClientAddress">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClientId" Type="int" Nullable="false" />
-          <Property Name="AddressId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Graphic">
           <Key>
@@ -124,10 +123,23 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Symbol" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Address_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Address_Voivodeship">
-          <End Role="Voivodeship" Type="Self.Voivodeship" Multiplicity="0..1" />
+          <End Role="Voivodeship" Type="Self.Voivodeship" Multiplicity="1" />
           <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Voivodeship">
@@ -159,30 +171,6 @@
             </Principal>
             <Dependent Role="CategorySize">
               <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClientAddress_Address">
-          <End Role="Address" Type="Self.Address" Multiplicity="1" />
-          <End Role="ClientAddress" Type="Self.ClientAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClientAddress">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClientAddress_Clinet">
-          <End Role="Client" Type="Self.Client" Multiplicity="1" />
-          <End Role="ClientAddress" Type="Self.ClientAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClientAddress">
-              <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -283,19 +271,23 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="BuyThemAllModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Avalibility" EntityType="Self.Avalibility" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryColor" EntityType="Self.CategoryColor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategorySize" EntityType="Self.CategorySize" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ClientAddress" EntityType="Self.ClientAddress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Graphic" EntityType="Self.Graphic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voivodeship" EntityType="Self.Voivodeship" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Address_Client" Association="Self.FK_Address_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
           <AssociationSet Name="FK_Address_Voivodeship" Association="Self.FK_Address_Voivodeship">
             <End Role="Voivodeship" EntitySet="Voivodeship" />
             <End Role="Address" EntitySet="Address" />
@@ -307,14 +299,6 @@
           <AssociationSet Name="FK_CategorySize_Cateogry" Association="Self.FK_CategorySize_Cateogry">
             <End Role="Category" EntitySet="Category" />
             <End Role="CategorySize" EntitySet="CategorySize" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClientAddress_Address" Association="Self.FK_ClientAddress_Address">
-            <End Role="Address" EntitySet="Address" />
-            <End Role="ClientAddress" EntitySet="ClientAddress" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClientAddress_Clinet" Association="Self.FK_ClientAddress_Clinet">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="ClientAddress" EntitySet="ClientAddress" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Address" Association="Self.FK_Order_Address">
             <End Role="Address" EntitySet="Address" />
@@ -358,21 +342,11 @@
           <EntitySet Name="Avalibilities" EntityType="BuyThemAllModel.Avalibility" />
           <EntitySet Name="Categories" EntityType="BuyThemAllModel.Category" />
           <EntitySet Name="Clients" EntityType="BuyThemAllModel.Client" />
-          <EntitySet Name="ClientAddresses" EntityType="BuyThemAllModel.ClientAddress" />
           <EntitySet Name="Graphics" EntityType="BuyThemAllModel.Graphic" />
           <EntitySet Name="Manufacturers" EntityType="BuyThemAllModel.Manufacturer" />
           <EntitySet Name="Orders" EntityType="BuyThemAllModel.Order" />
           <EntitySet Name="OrderProducts" EntityType="BuyThemAllModel.OrderProduct" />
           <EntitySet Name="Products" EntityType="BuyThemAllModel.Product" />
-          <EntitySet Name="Voivodeships" EntityType="BuyThemAllModel.Voivodeship" />
-          <AssociationSet Name="FK_Address_Voivodeship" Association="BuyThemAllModel.FK_Address_Voivodeship">
-            <End Role="Voivodeship" EntitySet="Voivodeships" />
-            <End Role="Address" EntitySet="Addresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClientAddress_Address" Association="BuyThemAllModel.FK_ClientAddress_Address">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="ClientAddress" EntitySet="ClientAddresses" />
-          </AssociationSet>
           <AssociationSet Name="FK_Order_Address" Association="BuyThemAllModel.FK_Order_Address">
             <End Role="Address" EntitySet="Addresses" />
             <End Role="Order" EntitySet="Orders" />
@@ -384,10 +358,6 @@
           <AssociationSet Name="FK_Product_Category" Association="BuyThemAllModel.FK_Product_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ClientAddress_Clinet" Association="BuyThemAllModel.FK_ClientAddress_Clinet">
-            <End Role="Client" EntitySet="Clients" />
-            <End Role="ClientAddress" EntitySet="ClientAddresses" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Client" Association="BuyThemAllModel.FK_Order_Client">
             <End Role="Client" EntitySet="Clients" />
@@ -419,6 +389,15 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="CategorySize" EntitySet="CategorySizes" />
           </AssociationSet>
+          <AssociationSet Name="FK_Address_Client" Association="BuyThemAllModel.FK_Address_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <EntitySet Name="Voivodeships" EntityType="BuyThemAllModel.Voivodeship" />
+          <AssociationSet Name="FK_Address_Voivodeship" Association="BuyThemAllModel.FK_Address_Voivodeship">
+            <End Role="Voivodeship" EntitySet="Voivodeships" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Address">
           <Key>
@@ -429,10 +408,9 @@
           <Property Name="HouseNo" Type="Int32" Nullable="false" />
           <Property Name="ApartmentNo" Type="Int32" Nullable="false" />
           <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="VoivodeshipId" Type="Int32" />
+          <Property Name="VoivodeshipId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Voivodeship" Relationship="BuyThemAllModel.FK_Address_Voivodeship" FromRole="Address" ToRole="Voivodeship" />
-          <NavigationProperty Name="ClientAddresses" Relationship="BuyThemAllModel.FK_ClientAddress_Address" FromRole="Address" ToRole="ClientAddress" />
-          <NavigationProperty Name="Orders" Relationship="BuyThemAllModel.FK_Order_Address" FromRole="Address" ToRole="Order" />
         </EntityType>
         <EntityType Name="Avalibility">
           <Key>
@@ -461,18 +439,8 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ClientAddresses" Relationship="BuyThemAllModel.FK_ClientAddress_Clinet" FromRole="Client" ToRole="ClientAddress" />
           <NavigationProperty Name="Orders" Relationship="BuyThemAllModel.FK_Order_Client" FromRole="Client" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="ClientAddress">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="AddressId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="BuyThemAllModel.FK_ClientAddress_Address" FromRole="ClientAddress" ToRole="Address" />
-          <NavigationProperty Name="Client" Relationship="BuyThemAllModel.FK_ClientAddress_Clinet" FromRole="ClientAddress" ToRole="Client" />
+          <NavigationProperty Name="Addresses" Relationship="BuyThemAllModel.FK_Address_Client" FromRole="Client" ToRole="Address" />
         </EntityType>
         <EntityType Name="Graphic">
           <Key>
@@ -535,38 +503,6 @@
           <NavigationProperty Name="Manufacturer" Relationship="BuyThemAllModel.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
           <NavigationProperty Name="OrderProducts" Relationship="BuyThemAllModel.FK_OrderProduct_Product" FromRole="Product" ToRole="OrderProduct" />
         </EntityType>
-        <EntityType Name="Voivodeship">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Addresses" Relationship="BuyThemAllModel.FK_Address_Voivodeship" FromRole="Voivodeship" ToRole="Address" />
-        </EntityType>
-        <Association Name="FK_Address_Voivodeship">
-          <End Type="BuyThemAllModel.Voivodeship" Role="Voivodeship" Multiplicity="0..1" />
-          <End Type="BuyThemAllModel.Address" Role="Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Voivodeship">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="VoivodeshipId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClientAddress_Address">
-          <End Type="BuyThemAllModel.Address" Role="Address" Multiplicity="1" />
-          <End Type="BuyThemAllModel.ClientAddress" Role="ClientAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClientAddress">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Order_Address">
           <End Type="BuyThemAllModel.Address" Role="Address" Multiplicity="1" />
           <End Type="BuyThemAllModel.Order" Role="Order" Multiplicity="*" />
@@ -600,18 +536,6 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ClientAddress_Clinet">
-          <End Type="BuyThemAllModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="BuyThemAllModel.ClientAddress" Role="ClientAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClientAddress">
-              <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -717,6 +641,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Address_Client">
+          <End Type="BuyThemAllModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="BuyThemAllModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Voivodeship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Addresses" Relationship="BuyThemAllModel.FK_Address_Voivodeship" FromRole="Voivodeship" ToRole="Address" />
+        </EntityType>
+        <Association Name="FK_Address_Voivodeship">
+          <End Type="BuyThemAllModel.Voivodeship" Role="Voivodeship" Multiplicity="1" />
+          <End Type="BuyThemAllModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voivodeship">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="VoivodeshipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -726,6 +683,7 @@
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="BuyThemAllModel.Address">
               <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="VoivodeshipId" ColumnName="VoivodeshipId" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="ApartmentNo" ColumnName="ApartmentNo" />
@@ -760,15 +718,6 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ClientAddresses">
-            <EntityTypeMapping TypeName="BuyThemAllModel.ClientAddress">
-              <MappingFragment StoreEntitySet="ClientAddress">
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -829,14 +778,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Voivodeships">
-            <EntityTypeMapping TypeName="BuyThemAllModel.Voivodeship">
-              <MappingFragment StoreEntitySet="Voivodeship">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CategoryColors">
             <EntityTypeMapping TypeName="BuyThemAllModel.CategoryColor">
               <MappingFragment StoreEntitySet="CategoryColor">
@@ -853,6 +794,15 @@
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voivodeships">
+            <EntityTypeMapping TypeName="BuyThemAllModel.Voivodeship">
+              <MappingFragment StoreEntitySet="Voivodeship">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
