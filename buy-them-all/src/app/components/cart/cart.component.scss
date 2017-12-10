@@ -9,7 +9,7 @@
 }
 
 .cart-empty {
-    margin-top: 50%;
+    margin-top: 25%;
     text-align: center;
 }
 
@@ -138,9 +138,9 @@ mat-card {
         background-color: rgb(241, 209, 0);
     }
 
-    .product-avalibility.red {
-        border: 1px solid rgb(192, 5, 5);
-        background-color: rgb(192, 5, 5);
+    .product-avalibility.orange {
+        border: 1px solid rgb(255, 137, 46);
+        background-color: rgb(255, 137, 46);
     }
 
 @media (max-width: 600px) {

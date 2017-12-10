@@ -4,7 +4,7 @@ GO
 INSERT INTO [dbo].[Avalibility] ([Name], [Description], [Color])
      VALUES ('Dostêpny 24h', 'Wysy³ka do 24 godzin', 'GREEN'),
 			('Dostêpny 48h', 'Wysy³ka do 48 godzin', 'YELLOW'),
-			('Niedostêpny', 'Brak produktu w magazynie', 'RED')
+			('Dostêpny 72h', 'Wysy³ka do 72 godzin', 'ORANGE')
 GO
 
 INSERT INTO [dbo].[Category] ([Code], [Name])

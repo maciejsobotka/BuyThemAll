@@ -19,7 +19,7 @@
         <div class="product-avalibility-text" fxLayout="row" fxLayoutAlign="start center">
             <div class="product-avalibility {{product.Avalibility.Color | lowercase}}"></div>
             {{product.Avalibility.Description}}
-          </div>
+        </div>
         <div class="product-info">{{product.Size.Code}} ({{product.Size.Description}})</div>
         <div class="product-info">{{product.Color.Name}}</div>
         <div class="product-price">{{productPrice(product) | number: '1.2-2'}}PLN</div>

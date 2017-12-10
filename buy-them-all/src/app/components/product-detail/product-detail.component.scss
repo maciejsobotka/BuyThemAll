@@ -12,6 +12,16 @@ mat-button-toggle.mat-button-toggle-checked {
     color: white;
 }
 
+.back-button {
+    padding-left: 2%;
+}
+
+@media (max-width: 600px) {
+    .back-button {
+        padding-left: 0;
+    }
+}
+
 .toggle-empty{
     position: absolute;
     top: -6px;

@@ -12,6 +12,7 @@ import { AuthService } from './shared/services/auth.service';
 import { DataService } from './shared/services/data.service';
 import { ToolbarService } from './shared/services/toolbar.service';
 import { CartService } from './shared/services/cart.service';
+import { ScrollService } from './shared/services/scroll.service';
 
 import { ClickStopPropagationDirective } from './shared/directives/click-stop-propagation.directive';
 
@@ -50,7 +51,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     AuthService,
     DataService,
     ToolbarService,
-    CartService
+    CartService,
+    ScrollService
   ],
   bootstrap: [AppComponent]
 })

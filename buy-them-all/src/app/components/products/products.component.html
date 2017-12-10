@@ -1,3 +1,4 @@
+<div *ngIf="!Products" class="spinner" fxLayout="column" fxLayoutAlign="center center"><mat-spinner></mat-spinner></div>
 <div  fxLayout="row"
       fxLayout.xs="column"
       fxLayoutAlign="space-around start"
@@ -19,15 +20,17 @@
         </div>
         <div *ngIf="!product.IsDiscounted" class="product-price">{{product.Price | number: '1.2-2'}}PLN</div>
     </mat-card-content>
-    <mat-card-actions class="p-y-0" fxLayout="row" fxLayoutAlign="center center">
-      <div class="product-avalibility {{product.Avalibility.Color | lowercase}}" matTooltip="{{product.Avalibility.Description}}" matTooltipPosition="left"></div>
-      <button class="product-wishlist" appClickStopPropagation mat-icon-button matTooltip="Dodaj do Whishlist" matTooltipPosition="right" (click)="addToWishlist(product)">
-        <mat-icon>favorite_border</mat-icon>
-      </button>
+    <mat-card-actions class="p-b-xs" fxLayout="row" fxLayoutAlign="center center">
+      <div class="product-avalibility-text" fxLayout="row" fxLayoutAlign="start center">
+        <div class="product-avalibility {{product.Avalibility.Color | lowercase}}"></div>
+        {{product.Avalibility.Description}}
+    </div>
     </mat-card-actions>
   </mat-card>
   <div fxFlex="24" fxFlex.sm="48"></div>
   <div fxFlex="24" fxFlex.sm="48"></div>
   <div fxFlex="24" fxFlex.sm="48"></div>
+  <button class="go-up-button" mat-icon-button appClickStopPropagation (click)="goTop()">
+    <mat-icon>arrow_upward</mat-icon>
+  </button>
 </div>
-<div class="spinner" fxLayout="column" fxLayoutAlign="center center"><mat-spinner *ngIf="!Products"></mat-spinner></div>

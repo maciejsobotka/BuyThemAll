@@ -1,10 +1,15 @@
-<div class.lg="m-t-lg p-t-lg" class.md="m-t-lg p-t-lg" class.sm="m-t-lg"
+<div class.lg="m-t-md" class.md="m-t-md" class.sm="m-t-sm"
      fxLayout="row"
      fxLayout.xs="column"
      fxLayoutAlign="space-around start"
      fxLayoutAlign.xs="start stretch"
      fxLayoutWrap
      fxLayoutWrap.xs="nowrap">
+  <div class="back-button" fxFlex="100">
+    <button mat-icon-button (click)="goBack()">
+      <mat-icon>keyboard_return</mat-icon>
+    </button>
+  </div>
   <app-product-carousel [Product]="Product" fxFlex="45"></app-product-carousel>
   <div class.lg="p-x-lg" class.md="p-x-lg" fxLayout="column" fxLayoutAlign="start start" fxLayoutAlign.xs="space-around center" fxFlex="45">
     <div class="p-y-sm" fxLayout="column" fxLayoutAlign.xs="start center">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -31,7 +32,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private titleService: Title,
     private dataService: DataService,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private location: Location) { }
 
   ngOnInit() {
     this.route.paramMap.switchMap((params: ParamMap) =>
@@ -72,5 +74,9 @@ export class ProductDetailComponent implements OnInit {
       this.Product.Size = this.productSize.value;
       this.cartService.addToWishlist(this.Product);
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
