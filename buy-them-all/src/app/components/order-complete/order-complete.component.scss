@@ -1,0 +1,32 @@
+mat-card {
+    min-height: 80%;
+    margin: 5%;
+}
+
+.thank-you-note {
+    font-weight: 700;
+    font-size: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+@media (max-width: 960px) {
+    .thank-you-note {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .thank-you-note {
+        font-size: 14px; 
+    }
+}
+
+.button {
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: black;
+    color: white;
+    border-radius: 0;
+    padding: 2px 30px;
+}

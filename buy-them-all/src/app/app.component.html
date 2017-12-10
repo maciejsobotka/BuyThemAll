@@ -7,10 +7,6 @@
           </button>
           <button mat-button class="button-toolbar" [routerLink]="['\home']" (click)="mainSideNav.close()"><img class="icon-toolbar" src="./assets/img/logo.png"><span class="home-toolbar">{{appName}}</span></button>
           <span fxFlex></span>
-
-          <button mat-icon-button>
-              <mat-icon>search</mat-icon>
-          </button>
           <button mat-icon-button [routerLink]="['\wishlist']">
             <mat-icon>favorite</mat-icon>
             <span *ngIf="cartService.WishlistSize" class="menu-count-items">{{cartService.WishlistSize}}</span>

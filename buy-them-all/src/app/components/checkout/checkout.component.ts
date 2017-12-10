@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DataService } from '../../shared/services/data.service';
@@ -27,12 +28,18 @@ export class CheckoutComponent implements OnInit {
     voivodeship: new FormControl('', Validators.required),
   });
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
     this.dataService.getVoivodeships()
     .subscribe(voiv => {
       this.Voivodeships = voiv;
     });
+  }
+
+  completeOrder() {
+    if (this.checkoutForm.valid) {
+      this.router.navigate(['/order-complete']);
+    }
   }
 }

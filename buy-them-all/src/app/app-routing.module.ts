@@ -7,6 +7,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrderCompleteComponent } from './components/order-complete/order-complete.component';
 
 const routes: Routes = [{
     path: '',
@@ -43,6 +44,14 @@ const routes: Routes = [{
     component: CheckoutComponent,
     data: {
       title: 'Checkout',
+      hidden: true
+    }
+  },
+  {
+    path: 'order-complete',
+    component: OrderCompleteComponent,
+    data: {
+      title: 'Dziękujemy za zamóienie',
       hidden: true
     }
   },
