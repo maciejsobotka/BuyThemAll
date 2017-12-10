@@ -171,10 +171,20 @@ mat-card {
     background-color: rgb(6, 161, 65);
 }
 
+.summary-container {
+    margin: 5% 20%;
+}
+
 .order-price {
     font-weight: 700;
+}
+
+.cart-avalibility-text {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
     text-align: right;
-    margin: 5% 20%;
+    padding-top: 2%;
 }
 
 @media (max-width: 960px) {
@@ -183,7 +193,7 @@ mat-card {
         margin-right: 10%; 
     }
 
-    .order-price {
+    .summary-container {
         margin: 2% 10%;
     }
 }
@@ -197,7 +207,7 @@ mat-card {
         margin: 0;
     }
     
-    .order-price {
+    .summary-container {
         margin: 2% 2%;
     }
 }

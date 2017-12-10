@@ -34,9 +34,24 @@
     </mat-card-content>
   </mat-card>
   <ng-container *ngIf="Products && Products.length > 0">
-    <div class="order-price">RAZEM: {{orderPrice() | number: '1.2-2'}}PLN</div>
+    <div class="summary-container" fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign="end center">
+        <div>
+          <div>Koszt produktów:</div>
+          <div>Szacowany koszt wysyłki:</div>
+          <div class="order-price">RAZEM:</div>
+        </div>
+        <div fxFlex="5"></div>
+        <div>
+          <div>{{orderPrice() | number: '1.2-2'}}PLN</div>
+          <div>10.00PLN</div>
+          <div class="order-price">{{orderPrice() + 10 | number: '1.2-2'}}PLN</div>
+        </div>
+      </div>
+      <div class="cart-avalibility-text">{{Avalibility.Description}}</div>
+    </div>
     <button mat-button class="checkout" [routerLink]="['/checkout']">
-      <ng-container *ngIf="IsScreenXs">{{orderPrice() | number: '1.2-2'}}PLN | </ng-container>
+      <ng-container *ngIf="IsScreenXs">{{orderPrice() + 10 | number: '1.2-2'}}PLN | </ng-container>
       Złóż zamówienie
     </button>
   </ng-container>

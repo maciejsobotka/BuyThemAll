@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CartService } from '../../shared/services/cart.service';
-import { IProduct } from '../../shared/models/product'
+import { IProduct } from '../../shared/models/product';
+import { IAvalibility } from '../../shared/models/avalibility';
 
 @Component({
   selector: 'app-cart',
@@ -9,6 +10,7 @@ import { IProduct } from '../../shared/models/product'
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
+  Avalibility: IAvalibility;
   Products: IProduct[];
 
   get IsScreenXs(): boolean {
@@ -19,6 +21,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.Products = this.cartService.retriveCart();
+    this.setOrderAvalibility();
   }
 
   orderPrice(): number {
@@ -35,5 +38,16 @@ export class CartComponent implements OnInit {
   removeItem(index: number) {
     this.Products.splice(index, 1);
     this.cartService.removeFromCart(index);
+    this.setOrderAvalibility();
+  }
+
+  setOrderAvalibility() {
+    if (this.Products.some(p => p.Avalibility.Name.indexOf('72') !== -1)) {
+      this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('72') !== -1).Avalibility;
+    } else if (this.Products.some(p => p.Avalibility.Name.indexOf('48') !== -1)) {
+      this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('48') !== -1).Avalibility;
+    } else if (this.Products.some(p => p.Avalibility.Name.indexOf('24') !== -1)) {
+      this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('24') !== -1).Avalibility;
+    }
   }
 }
