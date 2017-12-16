@@ -74,6 +74,7 @@
     <Build Include="Graphic.sql" />
     <Build Include="CategoryColor.sql" />
     <Build Include="CategorySize.sql" />
+    <Build Include="ShipmentType.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BuyThemAllDatabase.refactorlog" />

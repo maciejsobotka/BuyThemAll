@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CartService } from '../../shared/services/cart.service';
+import { IOrderProduct } from '../../shared/models/order-product';
 import { IProduct } from '../../shared/models/product';
 import { IAvalibility } from '../../shared/models/avalibility';
 import { DataHelper } from '../../shared/utils/data-helper';
@@ -12,7 +13,7 @@ import { DataHelper } from '../../shared/utils/data-helper';
 })
 export class CartComponent implements OnInit {
   Avalibility: IAvalibility;
-  Products: IProduct[];
+  Products: IOrderProduct[];
 
   get IsScreenXs(): boolean {
     return window.innerWidth <= 600;
@@ -26,7 +27,7 @@ export class CartComponent implements OnInit {
   }
 
   orderPrice(): number {
-    return this.Products.reduce((a, b) => a + this.productPrice(b), 0);
+    return this.Products.reduce((a, b) => a + this.productPrice(b.Product), 0);
   }
 
   productPrice(product: IProduct): number {
@@ -44,12 +45,12 @@ export class CartComponent implements OnInit {
 
   setOrderAvalibility() {
     if (DataHelper.hasValue(this.Products)) {
-      if (this.Products.some(p => p.Avalibility.Name.indexOf('72') !== -1)) {
-        this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('72') !== -1).Avalibility;
-      } else if (this.Products.some(p => p.Avalibility.Name.indexOf('48') !== -1)) {
-        this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('48') !== -1).Avalibility;
-      } else if (this.Products.some(p => p.Avalibility.Name.indexOf('24') !== -1)) {
-        this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('24') !== -1).Avalibility;
+      if (this.Products.some(p => p.Product.Avalibility.Name.indexOf('72') !== -1)) {
+        this.Avalibility = this.Products.find(p => p.Product.Avalibility.Name.indexOf('72') !== -1).Product.Avalibility;
+      } else if (this.Products.some(p => p.Product.Avalibility.Name.indexOf('48') !== -1)) {
+        this.Avalibility = this.Products.find(p => p.Product.Avalibility.Name.indexOf('48') !== -1).Product.Avalibility;
+      } else if (this.Products.some(p => p.Product.Avalibility.Name.indexOf('24') !== -1)) {
+        this.Avalibility = this.Products.find(p => p.Product.Avalibility.Name.indexOf('24') !== -1).Product.Avalibility;
       }
     }
   }

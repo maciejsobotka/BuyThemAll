@@ -89,3 +89,9 @@ INSERT INTO [dbo].[Voivodeship] ([Symbol], [Name])
 			('P', 'wielkopolskie'),
 			('Z', 'zachodniopomorskie')
 GO
+
+INSERT INTO [dbo].[ShipmentType] ([Code], [Name], [Price], [Description])
+     VALUES ('P-PL', 'Poczta Polska', 9.99, 'Od 2 - 5 dni roboczych'),
+			('CR', 'Kurier', 13.99, 'Od 1 - 2 dni roboczych'),
+			('P-LOCK', 'Paczkomat', 7.99, 'Od 1 - 2 dni roboczych')
+GO

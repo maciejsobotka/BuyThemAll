@@ -94,6 +94,9 @@
     <Compile Include="Product.cs">
       <DependentUpon>BuyThemAllModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ShipmentType.cs">
+      <DependentUpon>BuyThemAllModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Voivodeship.cs">
       <DependentUpon>BuyThemAllModel.tt</DependentUpon>
     </Compile>

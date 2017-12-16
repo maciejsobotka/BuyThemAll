@@ -4,25 +4,25 @@
 </div>
 <div fxLayout="column"
     fxLayoutAlign="space-between stretch">
-  <mat-card *ngFor="let product of Products; let i = index" [routerLink]="['/product', product.Id]" fxFlex="90">
+  <mat-card *ngFor="let product of Products; let i = index" [routerLink]="['/product', product?.Product.Id]" fxFlex="90">
     <mat-card-content class="m-y-0" fxLayout="row" fxLayoutAlign="start center">
         <div fxFlex></div>
-      <div class="image {{product.Category.Code | lowercase}}-{{product.Color.Code}}" fxFlex="24">
-        <div class="svg-container-{{product.Category.Code | lowercase}}">
-          <img *ngIf="product.Color.Code !== 'B'" src="./assets/img/svgs.svg#{{product.Graphic.Symbol}}">
-          <img *ngIf="product.Color.Code === 'B'" src="./assets/img/svgs.svg#w{{product.Graphic.Symbol}}">
+      <div class="image {{product?.Product.Category.Code | lowercase}}-{{product?.ProductColor.Code}}" fxFlex="24">
+        <div class="svg-container-{{product?.Product.Category.Code | lowercase}}">
+          <img *ngIf="product?.ProductColor.Code !== 'B'" src="./assets/img/svgs.svg#{{product?.Product.Graphic.Symbol}}">
+          <img *ngIf="product?.ProductColor.Code === 'B'" src="./assets/img/svgs.svg#w{{product?.Product.Graphic.Symbol}}">
         </div>
       </div>
       <div fxFlex></div>
       <div>
-        <div class="product-name">{{product.Name}}</div>
+        <div class="product-name">{{product?.Product.Name}}</div>
         <div class="product-avalibility-text" fxLayout="row" fxLayoutAlign="start center">
-            <div class="product-avalibility {{product.Avalibility.Color | lowercase}}"></div>
-            {{product.Avalibility.Description}}
+            <div class="product-avalibility {{product?.Product.Avalibility.Color | lowercase}}"></div>
+            {{product?.Product.Avalibility.Description}}
         </div>
-        <div class="product-info">{{product.Size.Code}} ({{product.Size.Description}})</div>
-        <div class="product-info">{{product.Color.Name}}</div>
-        <div class="product-price">{{productPrice(product) | number: '1.2-2'}}PLN</div>
+        <div class="product-info">{{product?.ProductSize.Code}} ({{product?.ProductSize.Description}})</div>
+        <div class="product-info">{{product?.ProductColor.Name}}</div>
+        <div class="product-price">{{productPrice(product.Product) | number: '1.2-2'}}PLN</div>
       </div>
       <div fxFlex></div>
       <div fxFlex></div>

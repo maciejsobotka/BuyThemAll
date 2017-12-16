@@ -12,15 +12,12 @@ namespace BuyThemAllModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Address
+    public partial class ShipmentType
     {
         public int Id { get; set; }
-        public string AddressLine { get; set; }
-        public string City { get; set; }
-        public string ZipCode { get; set; }
-        public int VoivodeshipId { get; set; }
-        public int ClientId { get; set; }
-    
-        public virtual Voivodeship Voivodeship { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public string Description { get; set; }
     }
 }

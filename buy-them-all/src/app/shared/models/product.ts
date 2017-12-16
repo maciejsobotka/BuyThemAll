@@ -6,6 +6,7 @@ import { ICategoryColor } from './category-color';
 import { ICategorySize } from './category-size';
 
 export interface IProduct {
+    Id: number;
     Avalibility: IAvalibility;
     AvalibilityId: number;
     Category: ICategory;
@@ -14,13 +15,9 @@ export interface IProduct {
     DiscountPercent: number;
     Graphic: IGraphic;
     GraphicId: number;
-    Id: number;
     IsDiscounted: boolean;
     Manufacturer: IManufacturer;
     ManufacturerId: number;
     Name: string;
     Price: number;
-    // additional properties
-    Color: ICategoryColor;
-    Size: ICategorySize;
 }

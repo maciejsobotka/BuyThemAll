@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { DataService } from '../../shared/services/data.service';
 import { IVoivodeship } from '../../shared/models/voivodeship';
 import { ObservableMedia } from '@angular/flex-layout';
+import { IShipmentType } from '../../shared/models/shipment-type';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const PHONE_REGEX = /^[0-9]{9}$/;
@@ -19,6 +20,7 @@ const ZIP_CODE_REGEX = /^[0-9]{2}-[0-9]{3}$/;
 })
 export class CheckoutComponent implements OnInit {
   ParcelLockers = new Array<any>();
+  ShipmentTypes: IShipmentType[];
   Voivodeships: IVoivodeship[];
 
   parcelChange$: Observable<any>;
@@ -44,10 +46,10 @@ export class CheckoutComponent implements OnInit {
   constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {
+    this.dataService.getShipmentTypes()
+      .subscribe(ship => this.ShipmentTypes = ship);
     this.dataService.getVoivodeships()
-    .subscribe(voiv => {
-      this.Voivodeships = voiv;
-    });
+      .subscribe(voiv => this.Voivodeships = voiv);
 
     this.parcelChange$ = this.checkoutForm.controls['parcelLockerCity'].valueChanges;
     this.parcelChange$.subscribe(val => this.dataService.getParcelLockers(this.checkoutForm.get('parcelLockerCity').value)
@@ -66,7 +68,7 @@ export class CheckoutComponent implements OnInit {
 
     this.shipmentChange$ = this.shipmentForm.controls['shipment'].valueChanges;
     this.shipmentChange$.subscribe(val => {
-      if (val === 3) {
+      if (val === 'P-LOCK') {
         this.checkoutForm.get('address').setValidators(null);
         this.checkoutForm.get('address').updateValueAndValidity();
         this.checkoutForm.get('zipCode').setValidators(null);
@@ -95,23 +97,5 @@ export class CheckoutComponent implements OnInit {
         this.checkoutForm.get('parcelLockerPoint').updateValueAndValidity();
       }
     });
-  }
-
-  validateParcelLockerCity(): ValidatorFn {
-    return (c: AbstractControl) => {
-      if (this.ParcelLockers.length > 0) {
-          return null;
-      } else {
-          return {
-            noParcelLockers: {
-              valid: false
-            }
-          };
-      }
-    }
-  }
-
-  a() {
-    console.log(this.checkoutForm);
   }
 }

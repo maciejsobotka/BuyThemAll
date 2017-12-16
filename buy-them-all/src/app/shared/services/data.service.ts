@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { IProduct } from '../models/product';
+import { IShipmentType } from '../models/shipment-type';
 import { IVoivodeship } from '../models/voivodeship';
 
 @Injectable()
@@ -32,8 +33,17 @@ export class DataService {
         });
   }
 
+  getShipmentTypes(): Observable<IShipmentType[]> {
+    return this.http.get(this.apiHost + '/api/Enums/GetShipmentTypes')
+        .map((res: Response) => res.json())
+        .catch((error: any) => {
+            console.log(error);
+            return Observable.throw(error.json().error || 'Server error');
+        });
+  }
+
   getVoivodeships(): Observable<IVoivodeship[]> {
-    return this.http.get(this.apiHost + '/api/Voivodeships/GetVoivodeships')
+    return this.http.get(this.apiHost + '/api/Enums/GetVoivodeships')
         .map((res: Response) => res.json())
         .catch((error: any) => {
             console.log(error);

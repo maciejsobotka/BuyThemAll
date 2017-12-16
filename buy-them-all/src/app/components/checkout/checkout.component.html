@@ -4,26 +4,12 @@
             <div class="step-title">Rodzaj przesyłki</div>
             <form [formGroup]="shipmentForm">
             <mat-radio-group formControlName="shipment" fxLayout="column" fxLayoutAlign=" start">
-                <mat-radio-button class="m-b-sm" [value]="1">
+                <mat-radio-button *ngFor="let shipmentType of ShipmentTypes" class="m-b-sm" [value]="shipmentType.Code">
                     <div>
-                        <div>Poczta Polska</div>
-                        <div class="shipment-price" fxFlex>9.99PLN</div>
+                        <div>{{shipmentType.Name}}</div>
+                        <div class="shipment-price" fxFlex>{{shipmentType.Price}}PLN</div>
                     </div>
-                    <div class="shipment-desc" fxFlex>Od 2 - 5 dni roboczych</div>
-                </mat-radio-button>
-                <mat-radio-button class="m-b-sm" [value]="2">
-                    <div>
-                        <div>Kurier</div>
-                        <div class="shipment-price" fxFlex>13.99PLN</div>
-                    </div>
-                    <div class="shipment-desc" fxFlex>Od 1 - 2 dni roboczych</div>
-                </mat-radio-button>
-                <mat-radio-button class="m-b-sm" [value]="3">
-                    <div>
-                        <div>Paczkomat</div>
-                        <div class="shipment-price" fxFlex>7.99PLN</div>
-                    </div>
-                    <div class="shipment-desc" fxFlex>Od 1 - 2 dni roboczych</div>
+                    <div class="shipment-desc" fxFlex>{{shipmentType.Description}}</div>
                 </mat-radio-button>
                 <mat-error *ngIf="shipmentForm.touched && shipmentForm.get('shipment').hasError('required')" class="shipment-validation">
                         Wybierz rodzaj przesyłki
@@ -37,7 +23,7 @@
         </mat-step>
         <mat-step [stepControl]="checkoutForm">
             <div class="step-title m-b-0">Dane wysyłki</div>
-            <div *ngIf="shipmentForm.get('shipment').value === 3" class="step-title parcel_title">Dane paczkomatu</div>
+            <div *ngIf="shipmentForm.get('shipment').value === 'P-LOCK'" class="step-title parcel_title">Dane paczkomatu</div>
             <form [formGroup]="checkoutForm"
                     fxLayout="row"
                     fxLayout.xs="column"
@@ -75,7 +61,7 @@
                         Telefon jest <strong>wymagany</strong>
                     </mat-error>
                 </mat-input-container>
-                <ng-container *ngIf="shipmentForm.get('shipment').value !== 3">
+                <ng-container *ngIf="shipmentForm.get('shipment').value !== 'P-LOCK'">
                     <mat-input-container fxFlex="48">
                         <input matInput placeholder="Adres" formControlName="address">
                         <mat-error *ngIf="checkoutForm.get('address').hasError('required')">
@@ -108,7 +94,7 @@
                     </mat-error>
                     </mat-form-field>
                 </ng-container>
-                <div *ngIf="shipmentForm.get('shipment').value === 3" class="parcel-form" fxLayout="column">
+                <div *ngIf="shipmentForm.get('shipment').value === 'P-LOCK'" class="parcel-form" fxLayout="column">
                     <mat-input-container fxFlex="48">
                         <input matInput placeholder="Miasto" formControlName="parcelLockerCity">
                         <mat-error *ngIf="checkoutForm.get('parcelLockerCity').hasError('required')">
@@ -132,7 +118,7 @@
                     </div>
                 <div class="m-t-md" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">    
                     <button mat-button matStepperPrevious><mat-icon>chevron_left</mat-icon>Cofnij</button>
-                    <button mat-button matStepperNext (click)="a()">Dalej<mat-icon>chevron_right</mat-icon></button>
+                    <button mat-button matStepperNext>Dalej<mat-icon>chevron_right</mat-icon></button>
                 </div>
             </form>
         </mat-step>

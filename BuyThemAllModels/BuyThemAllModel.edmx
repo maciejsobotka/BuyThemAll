@@ -16,10 +16,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Street" Type="nvarchar" MaxLength="50" />
-          <Property Name="HouseNo" Type="int" Nullable="false" />
-          <Property Name="ApartmentNo" Type="int" Nullable="false" />
+          <Property Name="AddressLine" Type="nvarchar(max)" Nullable="false" />
           <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="VoivodeshipId" Type="int" Nullable="false" />
           <Property Name="ClientId" Type="int" Nullable="false" />
         </EntityType>
@@ -63,9 +62,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Graphic">
           <Key>
@@ -89,19 +89,21 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Value" Type="float" Nullable="false" />
           <Property Name="RegistrationTime" Type="date" Nullable="false" />
-          <Property Name="RealizationTime" Type="date" Nullable="false" />
-          <Property Name="NoOfProducts" Type="int" Nullable="false" />
-          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="RealizationDays" Type="date" Nullable="false" />
           <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="ShipmentTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="ProductSizeId" Type="int" Nullable="false" />
+          <Property Name="ProductColorId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -117,6 +119,16 @@
           <Property Name="AvalibilityId" Type="int" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="GraphicId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShipmentType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Voivodeship">
           <Key>
@@ -195,6 +207,42 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ShipmentType">
+          <End Role="ShipmentType" Type="Self.ShipmentType" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShipmentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ShipmentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_CategoryColor">
+          <End Role="CategoryColor" Type="Self.CategoryColor" Multiplicity="1" />
+          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryColor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="ProductColorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_CategorySize">
+          <End Role="CategorySize" Type="Self.CategorySize" Multiplicity="1" />
+          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorySize">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="ProductSizeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -283,6 +331,7 @@
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShipmentType" EntityType="Self.ShipmentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Voivodeship" EntityType="Self.Voivodeship" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Address_Client" Association="Self.FK_Address_Client">
             <End Role="Client" EntitySet="Client" />
@@ -307,6 +356,18 @@
           <AssociationSet Name="FK_Order_Client" Association="Self.FK_Order_Client">
             <End Role="Client" EntitySet="Client" />
             <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ShipmentType" Association="Self.FK_Order_ShipmentType">
+            <End Role="ShipmentType" EntitySet="ShipmentType" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_CategoryColor" Association="Self.FK_OrderProduct_CategoryColor">
+            <End Role="CategoryColor" EntitySet="CategoryColor" />
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_CategorySize" Association="Self.FK_OrderProduct_CategorySize">
+            <End Role="CategorySize" EntitySet="CategorySize" />
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderProduct_Order" Association="Self.FK_OrderProduct_Order">
             <End Role="Order" EntitySet="Order" />
@@ -338,26 +399,39 @@
     <edmx:ConceptualModels>
       <Schema Namespace="BuyThemAllModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BuyThemAllEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Addresses" EntityType="BuyThemAllModel.Address" />
           <EntitySet Name="Avalibilities" EntityType="BuyThemAllModel.Avalibility" />
           <EntitySet Name="Categories" EntityType="BuyThemAllModel.Category" />
+          <EntitySet Name="CategoryColors" EntityType="BuyThemAllModel.CategoryColor" />
+          <EntitySet Name="CategorySizes" EntityType="BuyThemAllModel.CategorySize" />
           <EntitySet Name="Clients" EntityType="BuyThemAllModel.Client" />
           <EntitySet Name="Graphics" EntityType="BuyThemAllModel.Graphic" />
           <EntitySet Name="Manufacturers" EntityType="BuyThemAllModel.Manufacturer" />
           <EntitySet Name="Orders" EntityType="BuyThemAllModel.Order" />
           <EntitySet Name="OrderProducts" EntityType="BuyThemAllModel.OrderProduct" />
           <EntitySet Name="Products" EntityType="BuyThemAllModel.Product" />
-          <AssociationSet Name="FK_Order_Address" Association="BuyThemAllModel.FK_Order_Address">
-            <End Role="Address" EntitySet="Addresses" />
-            <End Role="Order" EntitySet="Orders" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_Avalibility" Association="BuyThemAllModel.FK_Product_Avalibility">
             <End Role="Avalibility" EntitySet="Avalibilities" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
+          <AssociationSet Name="FK_CategoryColor_Cateogry" Association="BuyThemAllModel.FK_CategoryColor_Cateogry">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CategoryColor" EntitySet="CategoryColors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CategorySize_Cateogry" Association="BuyThemAllModel.FK_CategorySize_Cateogry">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CategorySize" EntitySet="CategorySizes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Product_Category" Association="BuyThemAllModel.FK_Product_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_CategoryColor" Association="BuyThemAllModel.FK_OrderProduct_CategoryColor">
+            <End Role="CategoryColor" EntitySet="CategoryColors" />
+            <End Role="OrderProduct" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_CategorySize" Association="BuyThemAllModel.FK_OrderProduct_CategorySize">
+            <End Role="CategorySize" EntitySet="CategorySizes" />
+            <End Role="OrderProduct" EntitySet="OrderProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Client" Association="BuyThemAllModel.FK_Order_Client">
             <End Role="Client" EntitySet="Clients" />
@@ -379,39 +453,26 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="OrderProduct" EntitySet="OrderProducts" />
           </AssociationSet>
-          <EntitySet Name="CategoryColors" EntityType="BuyThemAllModel.CategoryColor" />
-          <EntitySet Name="CategorySizes" EntityType="BuyThemAllModel.CategorySize" />
-          <AssociationSet Name="FK_CategoryColor_Cateogry" Association="BuyThemAllModel.FK_CategoryColor_Cateogry">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="CategoryColor" EntitySet="CategoryColors" />
+          <EntitySet Name="ShipmentTypes" EntityType="BuyThemAllModel.ShipmentType" />
+          <AssociationSet Name="FK_Order_ShipmentType" Association="BuyThemAllModel.FK_Order_ShipmentType">
+            <End Role="ShipmentType" EntitySet="ShipmentTypes" />
+            <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK_CategorySize_Cateogry" Association="BuyThemAllModel.FK_CategorySize_Cateogry">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="CategorySize" EntitySet="CategorySizes" />
-          </AssociationSet>
+          <EntitySet Name="Addresses" EntityType="BuyThemAllModel.Address" />
+          <EntitySet Name="Voivodeships" EntityType="BuyThemAllModel.Voivodeship" />
           <AssociationSet Name="FK_Address_Client" Association="BuyThemAllModel.FK_Address_Client">
             <End Role="Client" EntitySet="Clients" />
             <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
-          <EntitySet Name="Voivodeships" EntityType="BuyThemAllModel.Voivodeship" />
           <AssociationSet Name="FK_Address_Voivodeship" Association="BuyThemAllModel.FK_Address_Voivodeship">
             <End Role="Voivodeship" EntitySet="Voivodeships" />
             <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
+          <AssociationSet Name="FK_Order_Address" Association="BuyThemAllModel.FK_Order_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Address">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="HouseNo" Type="Int32" Nullable="false" />
-          <Property Name="ApartmentNo" Type="Int32" Nullable="false" />
-          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="VoivodeshipId" Type="Int32" Nullable="false" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Voivodeship" Relationship="BuyThemAllModel.FK_Address_Voivodeship" FromRole="Address" ToRole="Voivodeship" />
-        </EntityType>
         <EntityType Name="Avalibility">
           <Key>
             <PropertyRef Name="Id" />
@@ -431,14 +492,33 @@
           <NavigationProperty Name="CategoryColors" Relationship="BuyThemAllModel.FK_CategoryColor_Cateogry" FromRole="Category" ToRole="CategoryColor" />
           <NavigationProperty Name="CategorySizes" Relationship="BuyThemAllModel.FK_CategorySize_Cateogry" FromRole="Category" ToRole="CategorySize" />
         </EntityType>
+        <EntityType Name="CategoryColor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategorySize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Orders" Relationship="BuyThemAllModel.FK_Order_Client" FromRole="Client" ToRole="Order" />
           <NavigationProperty Name="Addresses" Relationship="BuyThemAllModel.FK_Address_Client" FromRole="Client" ToRole="Address" />
         </EntityType>
@@ -464,23 +544,27 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Value" Type="Double" Nullable="false" />
           <Property Name="RegistrationTime" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="RealizationTime" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="NoOfProducts" Type="Int32" Nullable="false" />
-          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="RealizationDays" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Address" Relationship="BuyThemAllModel.FK_Order_Address" FromRole="Order" ToRole="Address" />
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="ShipmentTypeId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Client" Relationship="BuyThemAllModel.FK_Order_Client" FromRole="Order" ToRole="Client" />
           <NavigationProperty Name="OrderProducts" Relationship="BuyThemAllModel.FK_OrderProduct_Order" FromRole="Order" ToRole="OrderProduct" />
+          <NavigationProperty Name="ShipmentType" Relationship="BuyThemAllModel.FK_Order_ShipmentType" FromRole="Order" ToRole="ShipmentType" />
+          <NavigationProperty Name="Address" Relationship="BuyThemAllModel.FK_Order_Address" FromRole="Order" ToRole="Address" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
           <Property Name="OrderId" Type="Int32" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="Count" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="BuyThemAllModel.FK_OrderProduct_Order" FromRole="OrderProduct" ToRole="Order" />
+          <Property Name="ProductSizeId" Type="Int32" Nullable="false" />
+          <Property Name="ProductColorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategoryColor" Relationship="BuyThemAllModel.FK_OrderProduct_CategoryColor" FromRole="OrderProduct" ToRole="CategoryColor" />
+          <NavigationProperty Name="CategorySize" Relationship="BuyThemAllModel.FK_OrderProduct_CategorySize" FromRole="OrderProduct" ToRole="CategorySize" />
           <NavigationProperty Name="Product" Relationship="BuyThemAllModel.FK_OrderProduct_Product" FromRole="OrderProduct" ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">
@@ -501,20 +585,7 @@
           <NavigationProperty Name="Category" Relationship="BuyThemAllModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="Graphic" Relationship="BuyThemAllModel.FK_Product_Graphic" FromRole="Product" ToRole="Graphic" />
           <NavigationProperty Name="Manufacturer" Relationship="BuyThemAllModel.FK_Product_Manufacturer" FromRole="Product" ToRole="Manufacturer" />
-          <NavigationProperty Name="OrderProducts" Relationship="BuyThemAllModel.FK_OrderProduct_Product" FromRole="Product" ToRole="OrderProduct" />
         </EntityType>
-        <Association Name="FK_Order_Address">
-          <End Type="BuyThemAllModel.Address" Role="Address" Multiplicity="1" />
-          <End Type="BuyThemAllModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Product_Avalibility">
           <End Type="BuyThemAllModel.Avalibility" Role="Avalibility" Multiplicity="1" />
           <End Type="BuyThemAllModel.Product" Role="Product" Multiplicity="*" />
@@ -527,6 +598,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CategoryColor_Cateogry">
+          <End Type="BuyThemAllModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="BuyThemAllModel.CategoryColor" Role="CategoryColor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoryColor">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CategorySize_Cateogry">
+          <End Type="BuyThemAllModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="BuyThemAllModel.CategorySize" Role="CategorySize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategorySize">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_Category">
           <End Type="BuyThemAllModel.Category" Role="Category" Multiplicity="1" />
           <End Type="BuyThemAllModel.Product" Role="Product" Multiplicity="*" />
@@ -536,6 +631,30 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_CategoryColor">
+          <End Type="BuyThemAllModel.CategoryColor" Role="CategoryColor" Multiplicity="1" />
+          <End Type="BuyThemAllModel.OrderProduct" Role="OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryColor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="ProductColorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_CategorySize">
+          <End Type="BuyThemAllModel.CategorySize" Role="CategorySize" Multiplicity="1" />
+          <End Type="BuyThemAllModel.OrderProduct" Role="OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategorySize">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="ProductSizeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -599,48 +718,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CategoryColor">
+        <EntityType Name="ShipmentType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="CategorySize">
+        <Association Name="FK_Order_ShipmentType">
+          <End Type="BuyThemAllModel.ShipmentType" Role="ShipmentType" Multiplicity="1" />
+          <End Type="BuyThemAllModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShipmentType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ShipmentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Address">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="AddressLine" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="VoivodeshipId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Voivodeship" Relationship="BuyThemAllModel.FK_Address_Voivodeship" FromRole="Address" ToRole="Voivodeship" />
         </EntityType>
-        <Association Name="FK_CategoryColor_Cateogry">
-          <End Type="BuyThemAllModel.Category" Role="Category" Multiplicity="1" />
-          <End Type="BuyThemAllModel.CategoryColor" Role="CategoryColor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CategoryColor">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CategorySize_Cateogry">
-          <End Type="BuyThemAllModel.Category" Role="Category" Multiplicity="1" />
-          <End Type="BuyThemAllModel.CategorySize" Role="CategorySize" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CategorySize">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Voivodeship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <Association Name="FK_Address_Client">
           <End Type="BuyThemAllModel.Client" Role="Client" Multiplicity="1" />
           <End Type="BuyThemAllModel.Address" Role="Address" Multiplicity="*" />
@@ -653,15 +772,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Voivodeship">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Symbol" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Addresses" Relationship="BuyThemAllModel.FK_Address_Voivodeship" FromRole="Voivodeship" ToRole="Address" />
-        </EntityType>
         <Association Name="FK_Address_Voivodeship">
           <End Type="BuyThemAllModel.Voivodeship" Role="Voivodeship" Multiplicity="1" />
           <End Type="BuyThemAllModel.Address" Role="Address" Multiplicity="*" />
@@ -674,25 +784,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Order_Address">
+          <End Type="BuyThemAllModel.Address" Role="Address" Multiplicity="1" />
+          <End Type="BuyThemAllModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BuyThemAllModelStoreContainer" CdmEntityContainer="BuyThemAllEntities">
-          <EntitySetMapping Name="Addresses">
-            <EntityTypeMapping TypeName="BuyThemAllModel.Address">
-              <MappingFragment StoreEntitySet="Address">
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="VoivodeshipId" ColumnName="VoivodeshipId" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="ApartmentNo" ColumnName="ApartmentNo" />
-                <ScalarProperty Name="HouseNo" ColumnName="HouseNo" />
-                <ScalarProperty Name="Street" ColumnName="Street" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Avalibilities">
             <EntityTypeMapping TypeName="BuyThemAllModel.Avalibility">
               <MappingFragment StoreEntitySet="Avalibility">
@@ -712,12 +821,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CategoryColors">
+            <EntityTypeMapping TypeName="BuyThemAllModel.CategoryColor">
+              <MappingFragment StoreEntitySet="CategoryColor">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategorySizes">
+            <EntityTypeMapping TypeName="BuyThemAllModel.CategorySize">
+              <MappingFragment StoreEntitySet="CategorySize">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="BuyThemAllModel.Client">
               <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -742,10 +872,10 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="BuyThemAllModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ShipmentTypeId" ColumnName="ShipmentTypeId" />
                 <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="NoOfProducts" ColumnName="NoOfProducts" />
-                <ScalarProperty Name="RealizationTime" ColumnName="RealizationTime" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="RealizationDays" ColumnName="RealizationDays" />
                 <ScalarProperty Name="RegistrationTime" ColumnName="RegistrationTime" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -755,9 +885,11 @@
           <EntitySetMapping Name="OrderProducts">
             <EntityTypeMapping TypeName="BuyThemAllModel.OrderProduct">
               <MappingFragment StoreEntitySet="OrderProduct">
-                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="ProductColorId" ColumnName="ProductColorId" />
+                <ScalarProperty Name="ProductSizeId" ColumnName="ProductSizeId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -778,22 +910,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CategoryColors">
-            <EntityTypeMapping TypeName="BuyThemAllModel.CategoryColor">
-              <MappingFragment StoreEntitySet="CategoryColor">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <EntitySetMapping Name="ShipmentTypes">
+            <EntityTypeMapping TypeName="BuyThemAllModel.ShipmentType">
+              <MappingFragment StoreEntitySet="ShipmentType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CategorySizes">
-            <EntityTypeMapping TypeName="BuyThemAllModel.CategorySize">
-              <MappingFragment StoreEntitySet="CategorySize">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="BuyThemAllModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VoivodeshipId" ColumnName="VoivodeshipId" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine" ColumnName="AddressLine" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

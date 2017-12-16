@@ -15,11 +15,14 @@ namespace BuyThemAllModel
     public partial class OrderProduct
     {
         public int Id { get; set; }
+        public int Count { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
-        public int Count { get; set; }
+        public int ProductSizeId { get; set; }
+        public int ProductColorId { get; set; }
     
-        public virtual Order Order { get; set; }
+        public virtual CategoryColor CategoryColor { get; set; }
+        public virtual CategorySize CategorySize { get; set; }
         public virtual Product Product { get; set; }
     }
 }

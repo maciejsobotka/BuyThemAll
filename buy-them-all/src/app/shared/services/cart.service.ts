@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { DataHelper } from '../utils/data-helper';
-import { IProduct } from '../models/product';
+import { IOrderProduct } from '../models/order-product';
 
 @Injectable()
 export class CartService {
@@ -23,7 +23,7 @@ export class CartService {
 
   constructor() { }
 
-  addRangeToCart(product: IProduct[]) {
+  addRangeToCart(product: IOrderProduct[]) {
     let products = JSON.parse(localStorage.getItem('cart'));
     if (!DataHelper.hasValue(products)) {
       products = [];
@@ -32,7 +32,7 @@ export class CartService {
     localStorage.setItem('cart', JSON.stringify(products));
   }
 
-  addToCart(product: IProduct) {
+  addToCart(product: IOrderProduct) {
     let products = JSON.parse(localStorage.getItem('cart'));
     if (!DataHelper.hasValue(products)) {
       products = [];
@@ -41,7 +41,7 @@ export class CartService {
     localStorage.setItem('cart', JSON.stringify(products));
   }
 
-  addToWishlist(product: IProduct) {
+  addToWishlist(product: IOrderProduct) {
     let products = JSON.parse(localStorage.getItem('wishlist'));
     if (!DataHelper.hasValue(products)) {
       products = [];
@@ -67,18 +67,18 @@ export class CartService {
   }
 
   removeFromWishlist(index: number) {
-    const products: IProduct[] = JSON.parse(localStorage.getItem('wishlist'));
+    const products: IOrderProduct[] = JSON.parse(localStorage.getItem('wishlist'));
     if (DataHelper.hasValue(products)) {
       products.splice(index, 1);
       localStorage.setItem('wishlist', JSON.stringify(products));
     }
   }
 
-  retriveCart(): IProduct[] {
+  retriveCart(): IOrderProduct[] {
     return JSON.parse(localStorage.getItem('cart'));
   }
 
-  retriveWishlist(): IProduct[] {
+  retriveWishlist(): IOrderProduct[] {
     return JSON.parse(localStorage.getItem('wishlist'));
   }
 }

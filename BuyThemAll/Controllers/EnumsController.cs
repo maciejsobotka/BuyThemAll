@@ -4,7 +4,7 @@ using BuyThemAllModel;
 
 namespace BuyThemAll.Controllers
 {
-    public class VoivodeshipsController : ApiController
+    public class EnumsController : ApiController
     {
         #region Private fields
 
@@ -13,7 +13,13 @@ namespace BuyThemAll.Controllers
         #endregion
         #region Public methods
 
-        // GET: api/Voivodeships/GetVoivodeships
+        // GET: api/Enums/GetShipmentTypes
+        public IQueryable<ShipmentType> GetShipmentTypes()
+        {
+            return db.ShipmentTypes;
+        }
+
+        // GET: api/Enums/GetVoivodeships
         public IQueryable<Voivodeship> GetVoivodeships()
         {
             return db.Voivodeships;

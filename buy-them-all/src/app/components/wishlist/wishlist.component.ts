@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CartService } from '../../shared/services/cart.service';
+import { IOrderProduct } from '../../shared/models/order-product';
 import { IProduct } from '../../shared/models/product';
 
 @Component({
@@ -9,7 +10,7 @@ import { IProduct } from '../../shared/models/product';
   styleUrls: ['./wishlist.component.scss']
 })
 export class WishlistComponent implements OnInit {
-  Products: IProduct[];
+  Products: IOrderProduct[];
 
   constructor(private cartService: CartService) { }
 
@@ -17,7 +18,7 @@ export class WishlistComponent implements OnInit {
     this.Products = this.cartService.retriveWishlist();
   }
 
-  addToCart(product: IProduct, index: number) {
+  addToCart(product: IOrderProduct, index: number) {
     this.cartService.addToCart(product);
     this.removeItem(index);
   }

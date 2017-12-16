@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DataService } from '../../shared/services/data.service';
 import { CartService } from '../../shared/services/cart.service';
+import { IOrderProduct } from '../../shared/models/order-product';
 import { IProduct } from '../../shared/models/product';
 import { DataHelper } from '../../shared/utils/data-helper';
 
@@ -19,6 +20,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class ProductDetailComponent implements OnInit {
   Product: IProduct;
+  OrderProduct: IOrderProduct;
 
   form = new FormGroup({
     productSize: new FormControl('', Validators.required),
@@ -62,17 +64,35 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart() {
     if (this.validateForm()) {
-      this.Product.Color = this.productColor.value;
-      this.Product.Size = this.productSize.value;
-      this.cartService.addToCart(this.Product);
+      this.OrderProduct = {
+        Id: 0,
+        Count: 1,
+        OrderId: 0,
+        Product: this.Product,
+        ProductId: this.Product.Id,
+        ProductColor: this.productColor.value,
+        ProductColorId: this.productColor.value.Id,
+        ProductSize: this.productSize.value,
+        ProductSizeId: this.productSize.value.Id
+      };
+      this.cartService.addToCart(this.OrderProduct);
     }
   }
 
   addToWhishlist() {
     if (this.validateForm()) {
-      this.Product.Color = this.productColor.value;
-      this.Product.Size = this.productSize.value;
-      this.cartService.addToWishlist(this.Product);
+      this.OrderProduct = {
+        Id: 0,
+        Count: 1,
+        OrderId: 0,
+        Product: this.Product,
+        ProductId: this.Product.Id,
+        ProductColor: this.productColor.value,
+        ProductColorId: this.productColor.value.Id,
+        ProductSize: this.productSize.value,
+        ProductSizeId: this.productSize.value.Id
+      };
+      this.cartService.addToWishlist(this.OrderProduct);
     }
   }
 

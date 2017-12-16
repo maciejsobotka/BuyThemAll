@@ -23,14 +23,15 @@ namespace BuyThemAllModel
         public int Id { get; set; }
         public double Value { get; set; }
         public System.DateTime RegistrationTime { get; set; }
-        public System.DateTime RealizationTime { get; set; }
-        public int NoOfProducts { get; set; }
-        public int AddressId { get; set; }
+        public System.DateTime RealizationDays { get; set; }
         public int ClientId { get; set; }
+        public int AddressId { get; set; }
+        public int ShipmentTypeId { get; set; }
     
-        public virtual Address Address { get; set; }
         public virtual Client Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+        public virtual ShipmentType ShipmentType { get; set; }
+        public virtual Address Address { get; set; }
     }
 }

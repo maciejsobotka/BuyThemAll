@@ -1,5 +1,5 @@
 export interface IAvalibility {
-    Description: string;
     Id: number;
+    Description: string;
     Name: string;
 }
