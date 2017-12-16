@@ -34,10 +34,19 @@ export class DataService {
 
   getVoivodeships(): Observable<IVoivodeship[]> {
     return this.http.get(this.apiHost + '/api/Voivodeships/GetVoivodeships')
-    .map((res: Response) => res.json())
-    .catch((error: any) => {
-        console.log(error);
-        return Observable.throw(error.json().error || 'Server error');
-    });
+        .map((res: Response) => res.json())
+        .catch((error: any) => {
+            console.log(error);
+            return Observable.throw(error.json().error || 'Server error');
+        });
+  }
+
+  getParcelLockers(city: string): Observable<any> {
+    return this.http.get('https://api-shipx-pl.easypack24.net/v1/points?type=parcel_locker_only&status=Operating&per_page=200&city=' + city)
+        .map((res: Response) => res.json())
+        .catch((error: any) => {
+            console.log(error);
+            return Observable.throw(error.json().error || 'Server error');
+        });
   }
 }

@@ -4,15 +4,6 @@
     margin-top: 2%;
 }
 
-.proceed-button {
-    text-transform: uppercase;
-    font-weight: 700;
-    background-color: black;
-    color: white;
-    border-radius: 0;
-    padding: 2% 30px;
-}
-
 @media (max-width: 960px) {
     .form-card {
         margin-left: 20%;
@@ -25,4 +16,62 @@
         margin-left: 2%;
         margin-right: 2%; 
     }
+}
+
+.mat-button {
+    text-transform: uppercase;
+    font-weight: 700;
+    background-color: black;
+    color: white;
+    border-radius: 2px;
+    border: 2px solid white;
+    padding: 0 30px;
+}
+
+mat-icon {
+    margin-bottom: 2px;
+    left: 0;
+}
+
+.step-title {
+    font-size: 28px;
+    font-weight: 100;
+    margin-bottom: 6px;
+}
+
+    .step-title.parcel_title {
+        position: absolute;
+        margin-top: 120px;
+    }
+
+    @media (max-width: 600px) {
+        .step-title.parcel_title {
+            margin-top: 230px;
+        }
+    }
+
+.parcel-form {
+    margin-top: 44px;
+}
+
+.shipment-desc {
+    position: absolute;
+    font-weight: 100;
+    font-size: smaller;
+    margin-top: 16px;
+}
+
+.shipment-price {
+    position: absolute;
+    right: 50px;
+}
+
+@media (max-width: 600px) {
+    .shipment-price {
+        right: 42px;
+    }
+}
+
+.shipment-validation {
+    font-size: smaller;
 }

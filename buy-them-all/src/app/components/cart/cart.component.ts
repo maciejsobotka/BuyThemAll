@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../shared/services/cart.service';
 import { IProduct } from '../../shared/models/product';
 import { IAvalibility } from '../../shared/models/avalibility';
+import { DataHelper } from '../../shared/utils/data-helper';
 
 @Component({
   selector: 'app-cart',
@@ -42,12 +43,14 @@ export class CartComponent implements OnInit {
   }
 
   setOrderAvalibility() {
-    if (this.Products.some(p => p.Avalibility.Name.indexOf('72') !== -1)) {
-      this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('72') !== -1).Avalibility;
-    } else if (this.Products.some(p => p.Avalibility.Name.indexOf('48') !== -1)) {
-      this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('48') !== -1).Avalibility;
-    } else if (this.Products.some(p => p.Avalibility.Name.indexOf('24') !== -1)) {
-      this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('24') !== -1).Avalibility;
+    if (DataHelper.hasValue(this.Products)) {
+      if (this.Products.some(p => p.Avalibility.Name.indexOf('72') !== -1)) {
+        this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('72') !== -1).Avalibility;
+      } else if (this.Products.some(p => p.Avalibility.Name.indexOf('48') !== -1)) {
+        this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('48') !== -1).Avalibility;
+      } else if (this.Products.some(p => p.Avalibility.Name.indexOf('24') !== -1)) {
+        this.Avalibility = this.Products.find(p => p.Avalibility.Name.indexOf('24') !== -1).Avalibility;
+      }
     }
   }
 }

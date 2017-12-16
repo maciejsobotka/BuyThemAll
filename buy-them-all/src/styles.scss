@@ -50,24 +50,6 @@ div.loader {
     }
 }
 
-mat-sidenav {
-    width: 250px;
-}
-
-mat-sidenav-container.with-margin {
-    margin-top: 64px;
-}
-
-@media (max-width: 600px) {
-    mat-sidenav-container.with-margin {
-        margin-top: 56px;
-    }
-}
-
-mat-nav-list {
-    padding-top: 0 !important;
-}
-
 mat-card-title, mat-card-content, a {
     font-weight: 300 !important;
 }
@@ -86,27 +68,6 @@ mat-card.account-card {
 mat-error.server-error {
     font-size: 14px !important;
     font-weight: 300 !important;
-}
-
-button.button-toolbar {
-    height: 80%;
-    padding-left: 4px !important;
-    padding-right: 8px !important;
-}
-
-img.icon-toolbar {
-    height: 52px !important;
-}
-
-@media (max-width: 600px) {
-    img.icon-toolbar {
-        height: 44px !important;
-    }
-}
-
-span.home-toolbar {
-    font-size: 20px !important;
-    font-weight: 400 !important;
 }
 
 a.link {

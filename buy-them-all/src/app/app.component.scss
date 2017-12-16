@@ -1,3 +1,36 @@
+mat-sidenav {
+    width: 250px;
+}
+
+mat-sidenav-container.with-margin {
+    margin-top: 64px;
+}
+
+@media (max-width: 600px) {
+    mat-sidenav-container.with-margin {
+        margin-top: 56px;
+    }
+}
+
+mat-nav-list {
+    padding-top: 0 !important;
+}
+
+button.button-toolbar {
+    height: 80%;
+    padding-left: 4px !important;
+    padding-right: 8px !important;
+}
+
+img.icon-toolbar {
+    height: 36px !important;
+}
+
+span.home-toolbar {
+    font-size: 20px !important;
+    font-weight: 400 !important;
+}
+
 .nav-item {
     font-size: 14px;
     font-weight: bold;

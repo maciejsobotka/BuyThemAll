@@ -164,7 +164,6 @@ mat-card {
     padding: 5px 0;
     margin-left: 20%;
     margin-right: 20%;
-    margin-top: 2%;
 }
 
 .checkout:hover {
@@ -172,7 +171,7 @@ mat-card {
 }
 
 .summary-container {
-    margin: 5% 20%;
+    margin: 2% 20%;
 }
 
 .order-price {
@@ -194,7 +193,7 @@ mat-card {
     }
 
     .summary-container {
-        margin: 2% 10%;
+        margin: 0 10%;
     }
 }
 
@@ -208,6 +207,6 @@ mat-card {
     }
     
     .summary-container {
-        margin: 2% 2%;
+        margin: 0 2%;
     }
 }
