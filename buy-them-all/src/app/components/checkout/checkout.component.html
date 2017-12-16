@@ -114,12 +114,15 @@
                         <mat-error *ngIf="checkoutForm.get('parcelLockerCity').hasError('required')">
                             Miasto jest <strong>wymagane</strong>
                         </mat-error>
+                        <mat-error *ngIf="checkoutForm.get('parcelLockerCity').value && checkoutForm.get('parcelLockerCity').hasError('noParcelLockers')">
+                            W podanym mieście nie ma paczkomatów
+                        </mat-error>
                     </mat-input-container>
                     <mat-form-field *ngIf="ParcelLockers.length > 0" fxFlex="48">
                         <mat-select placeholder="Paczkomat" formControlName="parcelLockerPoint">
                             <mat-option *ngFor="let parcelLocker of ParcelLockers" [value]="parcelLocker.name">
-                            {{parcelLocker.name}}
-                            {{parcelLocker.location_description}}
+                            <div>{{parcelLocker.name}}: {{parcelLocker.address.line1}}</div>
+                            <div class="parcel-locker-line">{{parcelLocker.location_description}}</div>
                             </mat-option>
                         </mat-select>
                         <mat-error *ngIf="checkoutForm.get('parcelLockerPoint').hasError('required')">
@@ -129,7 +132,7 @@
                     </div>
                 <div class="m-t-md" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">    
                     <button mat-button matStepperPrevious><mat-icon>chevron_left</mat-icon>Cofnij</button>
-                    <button mat-button matStepperNext>Dalej<mat-icon>chevron_right</mat-icon></button>
+                    <button mat-button matStepperNext (click)="a()">Dalej<mat-icon>chevron_right</mat-icon></button>
                 </div>
             </form>
         </mat-step>

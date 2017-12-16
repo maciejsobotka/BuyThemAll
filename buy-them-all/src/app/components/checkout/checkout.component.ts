@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http } from '@angular/http';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
 import { DataService } from '../../shared/services/data.service';
 import { IVoivodeship } from '../../shared/models/voivodeship';
+import { ObservableMedia } from '@angular/flex-layout';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const PHONE_REGEX = /^[0-9]{9}$/;
@@ -50,7 +51,18 @@ export class CheckoutComponent implements OnInit {
 
     this.parcelChange$ = this.checkoutForm.controls['parcelLockerCity'].valueChanges;
     this.parcelChange$.subscribe(val => this.dataService.getParcelLockers(this.checkoutForm.get('parcelLockerCity').value)
-        .subscribe(parcels => this.ParcelLockers = parcels.items));
+        .subscribe(parcels => {
+          if (this.ParcelLockers.length === 0 && parcels.items.length > 0) {
+            this.ParcelLockers = parcels.items;
+            this.checkoutForm.get('parcelLockerCity').updateValueAndValidity();
+          } else if (this.ParcelLockers.length > 0 && parcels.items.length === 0) {
+            this.ParcelLockers = parcels.items;
+            this.checkoutForm.get('parcelLockerPoint').reset();
+            this.checkoutForm.get('parcelLockerCity').updateValueAndValidity();
+          } else {
+            this.ParcelLockers = parcels.items;
+          }
+        }));
 
     this.shipmentChange$ = this.shipmentForm.controls['shipment'].valueChanges;
     this.shipmentChange$.subscribe(val => {
@@ -63,7 +75,8 @@ export class CheckoutComponent implements OnInit {
         this.checkoutForm.get('city').updateValueAndValidity();
         this.checkoutForm.get('voivodeship').setValidators(null);
         this.checkoutForm.get('voivodeship').updateValueAndValidity();
-        this.checkoutForm.get('parcelLockerCity').setValidators(Validators.required);
+        this.checkoutForm.get('parcelLockerCity')
+            .setValidators([Validators.required, () => this.ParcelLockers.length > 0 ? null : {noParcelLockers: true}]);
         this.checkoutForm.get('parcelLockerCity').updateValueAndValidity();
         this.checkoutForm.get('parcelLockerPoint').setValidators(Validators.required);
         this.checkoutForm.get('parcelLockerPoint').updateValueAndValidity();
@@ -82,5 +95,23 @@ export class CheckoutComponent implements OnInit {
         this.checkoutForm.get('parcelLockerPoint').updateValueAndValidity();
       }
     });
+  }
+
+  validateParcelLockerCity(): ValidatorFn {
+    return (c: AbstractControl) => {
+      if (this.ParcelLockers.length > 0) {
+          return null;
+      } else {
+          return {
+            noParcelLockers: {
+              valid: false
+            }
+          };
+      }
+    }
+  }
+
+  a() {
+    console.log(this.checkoutForm);
   }
 }
