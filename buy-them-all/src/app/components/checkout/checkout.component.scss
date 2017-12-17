@@ -1,4 +1,6 @@
 .form-card {
+    padding-top: 2%;
+    padding-bottom: 2%;
     margin-left: 30%;
     margin-right: 30%;
     margin-top: 2%;
@@ -25,8 +27,16 @@
     color: white;
     border-radius: 2px;
     border: 2px solid white;
-    padding: 0 30px;
+    padding: 0 10px;
 }
+
+    .mat-button.chevron-left {
+        padding-right: 20px;
+    }
+
+    .mat-button.chevron-right {
+        padding-left: 20px;
+    }
 
 mat-icon {
     margin-bottom: 2px;
@@ -34,7 +44,7 @@ mat-icon {
 }
 
 .step-title {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 100;
     margin-bottom: 6px;
 }
@@ -90,4 +100,126 @@ mat-option:hover {
 .parcel-locker-line {
     font-weight: 100;
     font-size: smaller;
+}
+
+.summary-label {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.image {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-width: 65px;
+}
+
+    .image.t-shirt-W {
+        background-image: url("/assets/img/products/t-shirtW.jpg");
+    }
+    
+    .image.t-shirt-B {
+        background-image: url("/assets/img/products/t-shirtB.jpg");
+    }
+    
+    .image.t-shirt-P {
+        background-image: url("/assets/img/products/t-shirtP.jpg");
+    }
+    
+    .image.mug-W {
+        background-image: url("/assets/img/products/mugW.jpg");
+    }
+    
+    .image.mug-B {
+        background-image: url("/assets/img/products/mugB.jpg");
+    }
+    
+    .image.mug-R {
+        background-image: url("/assets/img/products/mugR.jpg");
+    }
+    
+    .image.poster-W {
+        background-image: url("/assets/img/products/posterW.jpg");
+    }
+    
+    .image.poster-B {
+        background-image: url("/assets/img/products/posterB.jpg");
+    }
+    
+
+.svg-container-t-shirt {
+    padding-top: 40%;
+    margin-left: 30%;
+    max-width: 40%;
+    padding-bottom: 30%;
+    margin-bottom: 20px;
+}
+
+.svg-container-mug {
+    padding-top: 50%;
+    margin-left: 15%;
+    max-width: 40%;
+    padding-bottom: 20%;
+    margin-bottom: 20px;
+}
+
+.svg-container-poster {
+    margin-top: 5%;
+    padding-top: 45%;
+    margin-left: 30%;
+    max-width: 40%;
+    padding-bottom: 20%;
+    margin-bottom: 20px;
+}
+
+.product-name {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.product-info {
+    font-size: 10px;
+}
+
+.product-price {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.product-avalibility-text {
+    font-size: 10px;
+}
+
+.product-avalibility {
+    height:9px;
+    width: 9px;
+    border-radius: 50%;
+    margin-right: 2px;
+}
+    .product-avalibility.green {
+        border: 1px solid rgb(36, 197, 36);
+        background-color: rgb(36, 197, 36);
+    }
+
+    .product-avalibility.yellow {
+        border: 1px solid rgb(241, 209, 0);
+        background-color: rgb(241, 209, 0);
+    }
+
+    .product-avalibility.orange {
+        border: 1px solid rgb(255, 137, 46);
+        background-color: rgb(255, 137, 46);
+    }
+
+.order-price {
+    font-weight: 700;
+}
+
+.order-avalibility-text {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: right;
+    padding-top: 2%;
 }

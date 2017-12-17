@@ -44,14 +44,14 @@
         <div fxFlex="5"></div>
         <div>
           <div>{{orderPrice() | number: '1.2-2'}}PLN</div>
-          <div>10.00PLN</div>
-          <div class="order-price">{{orderPrice() + 10 | number: '1.2-2'}}PLN</div>
+          <div>9.99PLN</div>
+          <div class="order-price">{{orderPrice() + 9.99 | number: '1.2-2'}}PLN</div>
         </div>
       </div>
       <div class="cart-avalibility-text">{{Avalibility.Description}}</div>
     </div>
     <button mat-button class="checkout" [routerLink]="['/checkout']">
-      <ng-container *ngIf="IsScreenXs">{{orderPrice() + 10 | number: '1.2-2'}}PLN | </ng-container>
+      <ng-container *ngIf="IsScreenXs">{{orderPrice() + 9.99 | number: '1.2-2'}}PLN | </ng-container>
       Złóż zamówienie
     </button>
   </ng-container>

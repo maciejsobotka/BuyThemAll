@@ -17,116 +17,172 @@
             </mat-radio-group>
             <div>
                 <div fxFlex></div>
-                <button mat-button matStepperNext (click)="shipmentForm.markAsTouched()">Dalej<mat-icon>chevron_right</mat-icon></button>
+                <button class="chevron-right" mat-button matStepperNext>Dalej<mat-icon>chevron_right</mat-icon></button>
             </div>
             </form>
         </mat-step>
         <mat-step [stepControl]="checkoutForm">
             <div class="step-title m-b-0">Dane wysyłki</div>
             <div *ngIf="shipmentForm.get('shipment').value === 'P-LOCK'" class="step-title parcel_title">Dane paczkomatu</div>
-            <form [formGroup]="checkoutForm"
-                    fxLayout="row"
+            <form [formGroup]="checkoutForm">
+                <div fxLayout="row"
                     fxLayout.xs="column"
                     fxLayoutAlign="space-between start"
                     fxLayoutAlign.xs=" center"
                     fxLayoutWrap
                     fxLayoutWrap.xs="nowrap">
-                <mat-input-container fxFlex="48">
-                    <input matInput placeholder="Imię" formControlName="name">
-                    <mat-error *ngIf="checkoutForm.get('name').hasError('required')">
-                        Imię jest <strong>wymagane</strong>
-                    </mat-error>
-                </mat-input-container>
-                <mat-input-container fxFlex="48">
-                    <input matInput placeholder="Nazwisko" formControlName="surname">
-                    <mat-error *ngIf="checkoutForm.get('surname').hasError('required')">
-                        Nazwisko jest <strong>wymagane</strong>
-                    </mat-error>
-                </mat-input-container>
-                <mat-input-container fxFlex="48">
-                    <input matInput placeholder="E-mail" formControlName="email">
-                    <mat-error *ngIf="checkoutForm.get('email').hasError('pattern')">
-                        Wpisz prawidłowy adres e-mail
-                    </mat-error>
-                    <mat-error *ngIf="checkoutForm.get('email').hasError('required')">
-                        Email jest <strong>wymagany</strong>
-                    </mat-error>
-                </mat-input-container>
-                <mat-input-container fxFlex="48">
-                    <input matInput placeholder="Telefon" formControlName="phone">
-                    <mat-error *ngIf="checkoutForm.get('phone').hasError('pattern')">
-                        XXXXXXXXX
-                    </mat-error>
-                    <mat-error *ngIf="checkoutForm.get('phone').hasError('required')">
-                        Telefon jest <strong>wymagany</strong>
-                    </mat-error>
-                </mat-input-container>
-                <ng-container *ngIf="shipmentForm.get('shipment').value !== 'P-LOCK'">
                     <mat-input-container fxFlex="48">
-                        <input matInput placeholder="Adres" formControlName="address">
-                        <mat-error *ngIf="checkoutForm.get('address').hasError('required')">
-                            Adres jest <strong>wymagany</strong>
+                        <input matInput placeholder="Imię" formControlName="name">
+                        <mat-error *ngIf="checkoutForm.get('name').hasError('required')">
+                            Imię jest <strong>wymagane</strong>
                         </mat-error>
                     </mat-input-container>
                     <mat-input-container fxFlex="48">
-                        <input matInput placeholder="Kod pocztowy" formControlName="zipCode">
-                        <mat-error *ngIf="checkoutForm.get('zipCode').hasError('pattern')">
-                            __-___
-                        </mat-error>
-                        <mat-error *ngIf="checkoutForm.get('zipCode').hasError('required')">
-                            Kod pocztowy jest <strong>wymagany</strong>
+                        <input matInput placeholder="Nazwisko" formControlName="surname">
+                        <mat-error *ngIf="checkoutForm.get('surname').hasError('required')">
+                            Nazwisko jest <strong>wymagane</strong>
                         </mat-error>
                     </mat-input-container>
                     <mat-input-container fxFlex="48">
-                        <input matInput placeholder="Miasto" formControlName="city">
-                        <mat-error *ngIf="checkoutForm.get('city').hasError('required')">
-                            Miasto jest <strong>wymagane</strong>
+                        <input matInput placeholder="E-mail" formControlName="email">
+                        <mat-error *ngIf="checkoutForm.get('email').hasError('email')">
+                            Wpisz prawidłowy adres e-mail
+                        </mat-error>
+                        <mat-error *ngIf="checkoutForm.get('email').hasError('required')">
+                            Email jest <strong>wymagany</strong>
                         </mat-error>
                     </mat-input-container>
-                    <mat-form-field fxFlex="48">
-                    <mat-select placeholder="Województwo" formControlName="voivodeship">
-                        <mat-option *ngFor="let voivodeship of Voivodeships" [value]="voivodeship.Id">
-                        {{voivodeship.Name}}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="checkoutForm.get('voivodeship').hasError('required')">
-                        Województwo jest <strong>wymagane</strong>
-                    </mat-error>
-                    </mat-form-field>
-                </ng-container>
-                <div *ngIf="shipmentForm.get('shipment').value === 'P-LOCK'" class="parcel-form" fxLayout="column">
                     <mat-input-container fxFlex="48">
-                        <input matInput placeholder="Miasto" formControlName="parcelLockerCity">
-                        <mat-error *ngIf="checkoutForm.get('parcelLockerCity').hasError('required')">
-                            Miasto jest <strong>wymagane</strong>
+                        <input matInput placeholder="Telefon" formControlName="phone">
+                        <mat-error *ngIf="checkoutForm.get('phone').hasError('pattern')">
+                            XXXXXXXXX
                         </mat-error>
-                        <mat-error *ngIf="checkoutForm.get('parcelLockerCity').value && checkoutForm.get('parcelLockerCity').hasError('noParcelLockers')">
-                            W podanym mieście nie ma paczkomatów
+                        <mat-error *ngIf="checkoutForm.get('phone').hasError('required')">
+                            Telefon jest <strong>wymagany</strong>
                         </mat-error>
                     </mat-input-container>
-                    <mat-form-field *ngIf="ParcelLockers.length > 0" fxFlex="48">
-                        <mat-select placeholder="Paczkomat" formControlName="parcelLockerPoint">
-                            <mat-option *ngFor="let parcelLocker of ParcelLockers" [value]="parcelLocker.name">
-                            <div>{{parcelLocker.name}}: {{parcelLocker.address.line1}}</div>
-                            <div class="parcel-locker-line">{{parcelLocker.location_description}}</div>
+                    <ng-container *ngIf="shipmentForm.get('shipment').value !== 'P-LOCK'">
+                        <mat-input-container fxFlex="48">
+                            <input matInput placeholder="Adres" formControlName="address">
+                            <mat-error *ngIf="checkoutForm.get('address').hasError('required')">
+                                Adres jest <strong>wymagany</strong>
+                            </mat-error>
+                        </mat-input-container>
+                        <mat-input-container fxFlex="48">
+                            <input matInput placeholder="Kod pocztowy" formControlName="zipCode">
+                            <mat-error *ngIf="checkoutForm.get('zipCode').hasError('pattern')">
+                                __-___
+                            </mat-error>
+                            <mat-error *ngIf="checkoutForm.get('zipCode').hasError('required')">
+                                Kod pocztowy jest <strong>wymagany</strong>
+                            </mat-error>
+                        </mat-input-container>
+                        <mat-input-container fxFlex="48">
+                            <input matInput placeholder="Miasto" formControlName="city">
+                            <mat-error *ngIf="checkoutForm.get('city').hasError('required')">
+                                Miasto jest <strong>wymagane</strong>
+                            </mat-error>
+                        </mat-input-container>
+                        <mat-form-field fxFlex="48">
+                        <mat-select placeholder="Województwo" formControlName="voivodeship">
+                            <mat-option *ngFor="let voivodeship of Voivodeships" [value]="voivodeship.Id">
+                            {{voivodeship.Name}}
                             </mat-option>
                         </mat-select>
-                        <mat-error *ngIf="checkoutForm.get('parcelLockerPoint').hasError('required')">
-                            Wybierz <strong>paczkomat</strong>
+                        <mat-error *ngIf="checkoutForm.get('voivodeship').hasError('required')">
+                            Województwo jest <strong>wymagane</strong>
                         </mat-error>
                         </mat-form-field>
+                    </ng-container>
+                    <div *ngIf="shipmentForm.get('shipment').value === 'P-LOCK'" class="parcel-form" fxLayout="column">
+                        <mat-input-container fxFlex="48">
+                            <input matInput placeholder="Miasto" formControlName="parcelLockerCity">
+                            <mat-error *ngIf="checkoutForm.get('parcelLockerCity').hasError('required')">
+                                Miasto jest <strong>wymagane</strong>
+                            </mat-error>
+                            <mat-error *ngIf="checkoutForm.get('parcelLockerCity').value && checkoutForm.get('parcelLockerCity').hasError('noParcelLockers')">
+                                W podanym mieście nie ma paczkomatów
+                            </mat-error>
+                        </mat-input-container>
+                        <mat-form-field *ngIf="ParcelLockers.length > 0" fxFlex="48">
+                            <mat-select placeholder="Paczkomat" formControlName="parcelLockerPoint">
+                                <mat-option *ngFor="let parcelLocker of ParcelLockers" [value]="parcelLocker">
+                                <div>{{parcelLocker.name}}: {{parcelLocker.address.line1}}</div>
+                                <div class="parcel-locker-line">{{parcelLocker.location_description}}</div>
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="checkoutForm.get('parcelLockerPoint').hasError('required')">
+                                Wybierz <strong>paczkomat</strong>
+                            </mat-error>
+                        </mat-form-field>
                     </div>
-                <div class="m-t-md" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">    
-                    <button mat-button matStepperPrevious><mat-icon>chevron_left</mat-icon>Cofnij</button>
-                    <button mat-button matStepperNext>Dalej<mat-icon>chevron_right</mat-icon></button>
+                </div>
+                <div class="m-t-md" fxLayout="row" fxLayoutAlign="space-between center">    
+                    <button class="chevron-left" mat-button matStepperPrevious><mat-icon>chevron_left</mat-icon>Cofnij</button>
+                    <button class="chevron-right" mat-button matStepperNext>Dalej<mat-icon>chevron_right</mat-icon></button>
                 </div>
             </form>
         </mat-step>
         <mat-step>
             <div class="step-title">Podsumowanie</div>
-            <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100">
-            <button mat-button matStepperPrevious><mat-icon>chevron_left</mat-icon>Cofnij</button>
-            <button mat-button matStepperNext [routerLink]="['/order-complete']">Zamów<mat-icon>chevron_right</mat-icon></button>
+            <div fxLayout="column"
+                fxLayoutAlign="space-between stretch">
+                <div *ngFor="let product of OrderProducts; let i = index" [routerLink]="['/product', product?.Product.Id]">
+                    <div class="m-y-0" fxLayout="row" fxLayoutAlign="start start">
+                        <div class="image {{product?.Product.Category.Code | lowercase}}-{{product?.ProductColor.Code}}">
+                            <div class="svg-container-{{product?.Product.Category.Code | lowercase}}">
+                            <img *ngIf="product?.ProductColor.Code !== 'B'" src="./assets/img/svgs.svg#{{product?.Product.Graphic.Symbol}}">
+                            <img *ngIf="product?.ProductColor.Code === 'B'" src="./assets/img/svgs.svg#w{{product?.Product.Graphic.Symbol}}">
+                            </div>
+                        </div>
+                        <div class="m-t-sm p-l-md">
+                            <div class="product-name">{{product?.Product.Name}}</div>
+                            <div class="product-avalibility-text" fxLayout="row" fxLayoutAlign="start center">
+                                <div class="product-avalibility {{product?.Product.Avalibility.Color | lowercase}}"></div>
+                                {{product?.Product.Avalibility.Description}}
+                            </div>
+                            <div class="product-info">{{product?.ProductSize.Code}} ({{product?.ProductSize.Description}})</div>
+                            <div class="product-info">{{product?.ProductColor.Name}}</div>
+                            <div class="product-price">{{productPrice(product.Product) | number: '1.2-2'}}PLN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="OrderProducts && OrderProducts.length > 0">
+                <div fxLayout="column">
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <div>
+                            <div>Koszt produktów:</div>
+                            <div>Koszt wysyłki:</div>
+                            <div class="order-price">RAZEM:</div>
+                        </div>
+                        <div fxFlex="5"></div>
+                        <div>
+                            <div>{{orderPrice() | number: '1.2-2'}}PLN</div>
+                            <div>{{OrderShipment?.Price | number: '1.2-2'}}PLN</div>
+                            <div class="order-price">{{orderPrice() + OrderShipment?.Price | number: '1.2-2'}}PLN</div>
+                        </div>
+                    </div>
+                    <div class="order-avalibility-text">Realizacja zamówienia do {{orderDeliveryTime()}} dni</div>
+                </div>  
+            </ng-container>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="start stretch">
+                <div class="m-t-sm">
+                    <div class="summary-label">Twoje dane</div>
+                    <div>{{OrderClient?.Name}} {{OrderClient?.Surname}}</div>
+                    <div>{{OrderClient?.Phone}}</div>
+                    <div>{{OrderClient?.Email}}</div>
+                </div>
+                <div class="m-t-sm">
+                    <div class="summary-label">Dane przesyłki</div>
+                    <div>{{OrderShipment?.Name}}</div>
+                    <div>{{OrderAddress?.AddressLine}}</div>
+                    <div>{{OrderAddress?.ZipCode}} {{OrderAddress?.City}}</div>
+                </div>
+            </div>
+            <div class="m-t-sm" fxLayout="row" fxLayoutAlign="space-between center">
+                <button class="chevron-left" mat-button matStepperPrevious><mat-icon>chevron_left</mat-icon>Cofnij</button>
+                <button class="chevron-right" mat-button matStepperNext [routerLink]="['/order-complete']" (click)="completeOrder()">Zamów<mat-icon>chevron_right</mat-icon></button>
             </div>
         </mat-step>
     </mat-horizontal-stepper>
