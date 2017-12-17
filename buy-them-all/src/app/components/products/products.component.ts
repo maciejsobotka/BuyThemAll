@@ -4,8 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../shared/services/data.service';
 import { ScrollService} from '../../shared/services/scroll.service';
 import { IProduct } from '../../shared/models/product';
-import { doesNotThrow } from 'assert';
-import { from } from 'rxjs/observable/from';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +11,10 @@ import { from } from 'rxjs/observable/from';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
+  AllProducts: IProduct[];
+  FiltersActive = false;
   Products: IProduct[];
+  SliderValue: number;
 
   constructor(private route: ActivatedRoute, private dataService: DataService, private scrollService: ScrollService) { }
 
@@ -25,6 +26,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const api: string = this.route.routeConfig.data.api;
     this.dataService.getProducts(api)
     .subscribe(prods => {
+        this.AllProducts = prods;
         this.Products = prods;
         setTimeout(() => document.querySelector('.mat-sidenav-content').scrollTop = this.scrollService.retriveScroll(api));
     });
@@ -36,5 +38,28 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   goTop() {
     this.scrollService.scrollTop();
+  }
+
+  filterProducts() {
+    if (this.SliderValue) {
+      this.Products = this.AllProducts.filter(p => this.productPrice(p) <= this.SliderValue);
+      this.FiltersActive = true;
+    }
+  }
+
+  productPrice(product: IProduct): number {
+    if (product.IsDiscounted) {
+      return this.discountedPrice(product);
+    }
+    return product.Price;
+  }
+
+  removeFilters() {
+    this.Products = this.AllProducts;
+    this.FiltersActive = false;
+  }
+
+  sliderValue(slider: any) {
+    this.SliderValue = slider.value;
   }
 }

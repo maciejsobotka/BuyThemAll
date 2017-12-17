@@ -1,4 +1,35 @@
 <div *ngIf="!Products" class="spinner" fxLayout="column" fxLayoutAlign="center center"><mat-spinner></mat-spinner></div>
+
+<button *ngIf="!filterPanelOpened" class="filter-button" mat-icon-button appClickStopPropagation (click)="filterPanel.open()">
+  <span class="glyphicon glyphicon glyphicon-filter"></span>
+</button>
+<mat-expansion-panel #filterPanel class="filter-panel"
+  (opened)="filterPanelOpened = true"
+  (closed)="filterPanelOpened = false">
+  <button class="filter-cancel-button" mat-icon-button (click)="filterPanel.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+  <div  fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="space-around start"
+    fxLayoutAlign.xs=" strech"
+    fxLayoutWrap
+    fxLayoutWrap.xs="nowrap">
+    <mat-card class="m-t-sm">
+      <div class="p-t-lg">
+        <span>Cena: </span>
+        <span>100</span>
+        <mat-slider class="slider" min="100" max="200" thumbLabel (input)="sliderValue($event)"></mat-slider>
+        <span>200</span>
+      </div>
+    </mat-card>
+  </div>
+  <div class="m-t-md" fxLayout="row" fxLayoutAlign="center center">
+    <button class="filter-panel-button" mat-button (click)="filterProducts()">Filtruj</button>
+    <button *ngIf="FiltersActive" class="filter-panel-button" mat-button (click)="removeFilters()">Usuń filtry</button>
+  </div>
+</mat-expansion-panel>
+
 <div  fxLayout="row"
       fxLayout.xs="column"
       fxLayoutAlign="space-around start"
@@ -30,7 +61,8 @@
   <div fxFlex="24" fxFlex.sm="48"></div>
   <div fxFlex="24" fxFlex.sm="48"></div>
   <div fxFlex="24" fxFlex.sm="48"></div>
-  <button class="go-up-button" mat-icon-button appClickStopPropagation (click)="goTop()">
-    <mat-icon>arrow_upward</mat-icon>
-  </button>
 </div>
+
+<button class="go-up-button" mat-icon-button appClickStopPropagation (click)="goTop()">
+    <mat-icon>arrow_upward</mat-icon>
+</button>
