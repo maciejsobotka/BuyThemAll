@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuyThemAllGenerateData
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        #region Private methods
+
+        private static void Main(string[] args)
         {
             GenerateDbData.Generate();
             Console.ReadLine();
         }
+
+        #endregion
     }
 }

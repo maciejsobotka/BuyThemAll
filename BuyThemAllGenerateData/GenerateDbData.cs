@@ -1,35 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Remoting.Channels;
-using System.Text;
-using System.Threading.Tasks;
 using BuyThemAllModel;
 
 namespace BuyThemAllGenerateData
 {
-    class GenerateDbData
+    internal class GenerateDbData
     {
+        #region Constants
+
         private static readonly BuyThemAllEntities db = new BuyThemAllEntities();
-        private const string tShirtDesc = "Niesamowita {0} z najlepszej jakości bawełny. Polecana przez miliony zadowolonych klientów. Nie można przegapić takiej okazji. Edycja limitowana. Tak, niedługo może być niedostępna. Zegar tyka a koszulka czeka na właściciela.";
         private static readonly string mugDesc = "Niesamowity {0} z najlepszej jakości porcelany. Polecany przez miliony zadowolonych klientów. Nie można przegapić takiej okazji. Edycja limitowana. Tak, niedługo może być niedostępny. Zegar tyka a kubek czeka na właściciela.";
         private static readonly string posterDesc = "Niesamowity {0} drukowany na metalu. Polecany przez miliony zadowolonych klientów. Nie można przegapić takiej okazji. Edycja limitowana. Tak, niedługo może być niedostępny. Zegar tyka a plakat czeka na właściciela.";
+        private const string tShirtDesc = "Niesamowita {0} z najlepszej jakości bawełny. Polecana przez miliony zadowolonych klientów. Nie można przegapić takiej okazji. Edycja limitowana. Tak, niedługo może być niedostępna. Zegar tyka a koszulka czeka na właściciela.";
+
+        #endregion
+        #region Public static methods
 
         public static void Generate()
         {
             var rand = new Random();
-            var categories = db.Categories;
-            var graphics = db.Graphics;
-            var manufacturers = db.Manufacturers.Select(m => m.Id).ToArray();
-            var avalibilities = db.Avalibilities.Select(a => a.Id).ToArray();
+            DbSet<Category> categories = db.Categories;
+            DbSet<Graphic> graphics = db.Graphics;
+            int[] manufacturers = db.Manufacturers.Select(m => m.Id).ToArray();
+            int[] avalibilities = db.Avalibilities.Select(a => a.Id).ToArray();
 
-            foreach (var graph in graphics)
+            foreach (Graphic graph in graphics)
             {
-                foreach (var cat in categories)
+                foreach (Category cat in categories)
                 {
                     var prod = new Product();
-                    prod.Price = rand.NextDouble() * 100 + 100;
                     prod.IsDiscounted = rand.Next(2) == 1;
                     if (prod.IsDiscounted)
                     {
@@ -41,16 +41,19 @@ namespace BuyThemAllGenerateData
                     prod.CategoryId = cat.Id;
                     if (cat.Code == "T-SHIRT")
                     {
+                        prod.Price = rand.Next(40, 100) + 0.99;
                         prod.Name = $"koszulka {graph.Name}";
                         prod.Description = string.Format(tShirtDesc, prod.Name);
                     }
                     else if (cat.Code == "MUG")
                     {
+                        prod.Price = rand.Next(20, 35) + 0.99;
                         prod.Name = $"kubek {graph.Name}";
                         prod.Description = string.Format(mugDesc, prod.Name);
                     }
                     else if (cat.Code == "POSTER")
                     {
+                        prod.Price = rand.Next(25, 60) + 0.99;
                         prod.Name = $"plakat {graph.Name}";
                         prod.Description = string.Format(posterDesc, prod.Name);
                     }
@@ -62,5 +65,7 @@ namespace BuyThemAllGenerateData
             db.SaveChanges();
             Console.WriteLine("Products added.");
         }
+
+        #endregion
     }
 }
