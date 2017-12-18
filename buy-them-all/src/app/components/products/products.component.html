@@ -1,32 +1,87 @@
 <div *ngIf="!Products" class="spinner" fxLayout="column" fxLayoutAlign="center center"><mat-spinner></mat-spinner></div>
 
-<button *ngIf="!filterPanelOpened" class="filter-button" mat-icon-button appClickStopPropagation (click)="filterPanel.open()">
+<button *ngIf="!filterPanelOpened && !sortPanelOpened" class="filter-button" [ngClass]="{'filter-button-active': FiltersActive}" mat-icon-button appClickStopPropagation (click)="filterPanel.open()">
   <span class="glyphicon glyphicon glyphicon-filter"></span>
 </button>
 <mat-expansion-panel #filterPanel class="filter-panel"
   (opened)="filterPanelOpened = true"
   (closed)="filterPanelOpened = false">
-  <button class="filter-cancel-button" mat-icon-button (click)="filterPanel.close()">
+  <button class="cancel-button" mat-icon-button (click)="filterPanel.close()">
     <mat-icon>clear</mat-icon>
   </button>
-  <div  fxLayout="row"
+  <form [formGroup]="filterForm"
+    fxLayout="row"
     fxLayout.xs="column"
-    fxLayoutAlign="space-around start"
-    fxLayoutAlign.xs=" strech"
+    fxLayoutAlign="center start"
+    fxLayoutAlign.xs=" center"
     fxLayoutWrap
+    fxLayoutGap="16px"
+    fxLayoutGap.xs="0"
     fxLayoutWrap.xs="nowrap">
-    <mat-card class="m-t-sm">
-      <div class="p-t-lg">
-        <span>Cena: </span>
-        <span>100</span>
-        <mat-slider class="slider" min="100" max="200" thumbLabel (input)="sliderValue($event)"></mat-slider>
-        <span>200</span>
-      </div>
-    </mat-card>
-  </div>
+      <mat-card class="m-t-sm">
+        <div class="filter-width">
+          <mat-form-field>
+            <input matInput formControlName="name" placeholder="Nazwa">
+          </mat-form-field>
+        </div>
+      </mat-card>
+      <mat-card class="m-t-sm">
+        <div class="filter-height">
+          <span>{{MinPrice}}PLN</span>
+          <mat-slider class="slider" formControlName="price" [min]="MinPrice" [max]="MaxPrice" thumbLabel></mat-slider>
+          <span>{{MaxPrice}}PLN</span>
+        </div>
+      </mat-card>
+      <mat-card class="m-t-sm">
+        <div class="filter-width">
+          <mat-form-field>
+            <mat-select formControlName="avalibility" placeholder="Dostępność" >
+                <mat-option *ngFor="let avalibility of Avalibilities" [value]="avalibility.Description">
+                {{avalibility.Description}}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card>
+  </form>
   <div class="m-t-md" fxLayout="row" fxLayoutAlign="center center">
-    <button class="filter-panel-button" mat-button (click)="filterProducts()">Filtruj</button>
-    <button *ngIf="FiltersActive" class="filter-panel-button" mat-button (click)="removeFilters()">Usuń filtry</button>
+    <button class="panel-button" mat-button (click)="filterProducts()">Filtruj</button>
+    <button *ngIf="FiltersActive" class="panel-button" mat-button (click)="removeFilters()">Usuń filtry</button>
+  </div>
+</mat-expansion-panel>
+
+<button *ngIf="!sortPanelOpened && !filterPanelOpened" class="sort-button" [ngClass]="{'sort-button-active': SortActive}" mat-icon-button appClickStopPropagation (click)="sortPanel.open()">
+  <span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+</button>
+<mat-expansion-panel #sortPanel class="filter-panel"
+(opened)="sortPanelOpened = true"
+(closed)="sortPanelOpened = false">
+  <button class="cancel-button" mat-icon-button (click)="sortPanel.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+  <form [formGroup]="sortForm"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayoutAlign="center start"
+    fxLayoutAlign.xs=" center"
+    fxLayoutWrap
+    fxLayoutGap="16px"
+    fxLayoutGap.xs="0"
+    fxLayoutWrap.xs="nowrap">
+      <mat-card class="m-t-sm">
+        <mat-radio-group formControlName="sort" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+            <mat-radio-button [value]="1">
+              <div>Cena rosnąco</div>
+            </mat-radio-button>
+            <mat-radio-button [value]="2">
+              <div>Cena malejąco</div>
+            </mat-radio-button>
+        </mat-radio-group>
+      </mat-card>
+  </form>
+  <div class="m-t-md" fxLayout="row" fxLayoutAlign="center center">
+      <button class="panel-button" mat-button (click)="sortProducts()">Sortuj</button>
+      <button *ngIf="SortActive" class="panel-button" mat-button (click)="removeSort()">Usuń sortowanie</button>
   </div>
 </mat-expansion-panel>
 

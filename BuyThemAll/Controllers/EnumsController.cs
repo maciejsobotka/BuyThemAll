@@ -13,6 +13,12 @@ namespace BuyThemAll.Controllers
         #endregion
         #region Public methods
 
+        // GET: api/Enums/GetAvalibilities
+        public IQueryable<Avalibility> GetAvalibilities()
+        {
+            return db.Avalibilities;
+        }
+
         // GET: api/Enums/GetShipmentTypes
         public IQueryable<ShipmentType> GetShipmentTypes()
         {

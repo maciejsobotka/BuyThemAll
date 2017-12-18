@@ -143,7 +143,8 @@ mat-card {
     z-index: 999;
 }
 
-mat-expansion-panel{
+mat-expansion-panel {
+    background-color: #eee;
     margin-top: 12px;
 }
 
@@ -177,13 +178,13 @@ mat-slider {
     background-color: black;
 } 
 
-.filter-cancel-button {
+.cancel-button {
     position: absolute;
     top: 5px;
     right: 20px;
 }
 
-.filter-panel-button {
+.panel-button {
     text-transform: uppercase;
     font-weight: 700;
     background-color: black;
@@ -200,10 +201,29 @@ mat-slider {
     z-index: 999;
 }
 
+.sort-button {
+    position: fixed;
+    top: 68px;
+    right: 64px;
+    background-color: rgba(196, 196, 196, 0.685);
+    z-index: 999;
+}
+
+.filter-button-active,
+.sort-button-active {
+    background-color: rgba(0, 0, 0, 0.795);
+    color: white;
+}
+
 @media (max-width: 600px) {
     .filter-button {
         top: 60px;
     }
+
+    .sort-button {
+        top: 60px;
+    }
+    
 }
 
 .go-up-container {
@@ -216,4 +236,12 @@ mat-slider {
     right: 20px;
     background-color: rgba(196, 196, 196, 0.685);
     z-index: 999;
+}
+
+.filter-width {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.filter-height {
+    padding-top: 9px;
 }

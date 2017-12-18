@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { IAvalibility } from '../models/avalibility';
 import { IProduct } from '../models/product';
 import { IShipmentType } from '../models/shipment-type';
 import { IVoivodeship } from '../models/voivodeship';
@@ -31,6 +32,15 @@ export class DataService {
             console.log(error);
             return Observable.throw(error.json().error || 'Server error');
         });
+  }
+
+  getAvalibilities(): Observable<IAvalibility[]> {
+    return this.http.get(this.apiHost + '/api/Enums/GetAvalibilities')
+    .map((res: Response) => res.json())
+    .catch((error: any) => {
+        console.log(error);
+        return Observable.throw(error.json().error || 'Server error');
+    });
   }
 
   getShipmentTypes(): Observable<IShipmentType[]> {

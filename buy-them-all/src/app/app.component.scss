@@ -16,6 +16,10 @@ mat-nav-list {
     padding-top: 0 !important;
 }
 
+mat-sidenav-container.mat-drawer-container {
+    background-color: #eee;
+}
+
 button.button-toolbar {
     height: 80%;
     padding-left: 4px !important;
