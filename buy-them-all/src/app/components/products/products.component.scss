@@ -215,6 +215,29 @@ mat-slider {
     color: white;
 }
 
+.go-up-button {
+    position: fixed;
+    bottom: 5px;
+    right: 20px;
+    background-color: rgba(196, 196, 196, 0.685);
+    z-index: 999;
+}
+
+@media (max-width: 960px) {
+    .filter-button {
+        right: 12px;
+    }
+
+    .sort-button {
+        right: 56px;
+    }
+
+    .go-up-button {
+        right: 12px;
+    }
+    
+}
+
 @media (max-width: 600px) {
     .filter-button {
         top: 60px;
@@ -224,18 +247,6 @@ mat-slider {
         top: 60px;
     }
     
-}
-
-.go-up-container {
-    position: absolute;
-    min-height: 100%;
-}
-.go-up-button {
-    position: fixed;
-    bottom: 5px;
-    right: 20px;
-    background-color: rgba(196, 196, 196, 0.685);
-    z-index: 999;
 }
 
 .filter-width {
