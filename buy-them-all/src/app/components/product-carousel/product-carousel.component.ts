@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
 
 import { IProduct } from '../../shared/models/product';
 
@@ -7,8 +7,15 @@ import { IProduct } from '../../shared/models/product';
   templateUrl: './product-carousel.component.html',
   styleUrls: ['./product-carousel.component.scss']
 })
-export class ProductCarouselComponent {
+export class ProductCarouselComponent implements AfterViewInit {
 
   @Input()
   Product: IProduct;
+
+  @ViewChild('carousel')
+  Carousel: any;
+
+  ngAfterViewInit(): void {
+    this.Carousel.nativeElement.style.touchAction = 'pan-y';
+  }
 }
